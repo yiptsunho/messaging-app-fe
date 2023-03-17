@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "type": "text",
+    "content": "This is the 1st message",
+    "time": ""
+  },
+  {
+    "id": 2,
+    "type": "text",
+    "content": "This is the 2nd message",
+    "time": ""
+  },
+  {
+    "id": 3,
+    "type": "text",
+    "content": "This is the 3rd message",
+    "time": ""
+  }
+]
