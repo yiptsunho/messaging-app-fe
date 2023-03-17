@@ -3,11 +3,12 @@ import {Grid, Typography} from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import MoreIcon from '@mui/icons-material/MoreHoriz';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from "@mui/material/IconButton";
 import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function generate(element) {
     return [0, 1, 2].map((value) =>
@@ -22,7 +23,11 @@ function ChatList () {
             <List>
                 {generate(
                     <ListItem
-                        secondaryAction={"Time"}
+                        secondaryAction={
+                            <IconButton edge="end" aria-label="delete">
+                                <MoreIcon />
+                            </IconButton>
+                        }
                     >
                         <ListItemAvatar>
                             <Avatar>
@@ -30,7 +35,8 @@ function ChatList () {
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText
-                            primary="Last message"
+                            primary="Jacky"
+                            secondary="Last message"
                         />
                     </ListItem>,
                 )}
