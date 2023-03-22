@@ -1,8 +1,13 @@
-function Message () {
+import React from "react";
+import {Chip, Grid} from "@mui/material";
+
+function Message (props) {
+    const { message } = props;
+
     return (
-        <div>
-            This is the Message page
-        </div>
+        <Grid item md={12}>
+            <Chip label={message.content}/>
+        </Grid>
     )
 };
 

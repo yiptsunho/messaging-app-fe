@@ -33,7 +33,6 @@ function Login (props) {
     const navigate = useNavigate()
     const loginId = useRef('')
     const password = useRef('')
-    const [openDialog, setOpenDialog] = useState(false)
     const [loginIdValid, setLoginIdValid] = useState(true)
     const [passwordValid, setPasswordValid] = useState(true)
 
@@ -58,6 +57,7 @@ function Login (props) {
         }
         if (loginIdValid && passwordValid) {
             navigate("/main")
+            setIsLogin(true)
         }
         // login(params, setIsLogin, navigate, setOpenDialog, refreshToken)
     };

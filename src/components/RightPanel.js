@@ -16,27 +16,25 @@ function RightPanel () {
             {/*<Grid container>*/}
             {/*    This is the RightPanel page*/}
             {/*</Grid>*/}
-            <Container>
-                <List>
-                    <ListItem
-                        secondaryAction={
-                            <IconButton edge="end" aria-label="delete">
-                                <MoreIcon />
-                            </IconButton>
-                        }
-                    >
-                        <ListItemAvatar>
-                            <Avatar>
-                                <FolderIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary="Jacky"
-                            secondary="Last message"
-                        />
-                    </ListItem>
-                </List>
-            </Container>
+            <List>
+                <ListItem
+                    secondaryAction={
+                        <IconButton edge="end" aria-label="delete">
+                            <MoreIcon />
+                        </IconButton>
+                    }
+                >
+                    <ListItemAvatar>
+                        <Avatar>
+                            <FolderIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary="Jacky"
+                        secondary="Last message"
+                    />
+                </ListItem>
+            </List>
             <Grid container>
                 <ChatRoom />
             </Grid>

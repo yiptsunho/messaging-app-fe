@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -6,17 +6,19 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
+import PropTypes from "prop-types";
+import { DialogContext } from '../App';
 
 function CustomDialog(props, ref) {
-    const { open, setOpen, title, content, leftLabel, leftAction, rightLabel, rightAction } = props;
-
+    const { title, content, leftLabel, leftAction, rightLabel, rightAction } = props;
+    const { openDialog, setOpenDialog } = useContext(DialogContext)
     const defaultHandleClose = () => {
-        setOpen(false);
+        setOpenDialog(false);
     };
 
     return (
         <Dialog
-            open={open}
+            open={openDialog}
             onClose={rightAction ?? defaultHandleClose}
             PaperProps={{
                 style: {
@@ -44,6 +46,11 @@ function CustomDialog(props, ref) {
             </DialogActions>
         </Dialog >
     );
+}
+
+CustomDialog.propTypes = {
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired
 }
 
 export default CustomDialog;

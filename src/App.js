@@ -1,5 +1,5 @@
 import './App.css';
-import {CssBaseline} from "@mui/material";
+import {Backdrop, CssBaseline} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
@@ -8,39 +8,38 @@ import Main from "./pages/Main";
 import {createContext, useState} from "react";
 import CreateAccount from "./pages/CreateAccount";
 import ForgetPassword from "./pages/ForgetPassword";
-import * as PropTypes from "prop-types";
+import CustomDialog from "./components/CustomDialog";
 
-const DialogContext = createContext({})
-
-function CustomDialog(props) {
-    return null;
-}
-
-CustomDialog.propTypes = {
-    setOpen: PropTypes.func,
-    open: PropTypes.bool
-};
+export const DialogContext = createContext({})
 
 function App() {
     const [isLogin, setIsLogin] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const securityCheck = (component) => {
+        if (isLogin) {
+            return component
+        }
+        return <Login />
+    }
 
     return (
       <>
-          <DialogContext.Provider value={{ openDialog, setOpenDialog }}>
+          <DialogContext.Provider value={{ openDialog, setOpenDialog, setIsLoading }}>
               <CssBaseline />
               <Routes>
                   <Route exact path="/" element={<Login setIsLogin={setIsLogin}/>} />
-                  <Route exact path="/landing" element={<Landing />} />
-                  <Route exact path="/fetching" element={<Fetching />} />
-                  <Route exact path="/main" element={<Main />} />
-                  <Route exact path="/createaccount" element={<CreateAccount />} />
-                  <Route exact path="/forgetpassword" element={<ForgetPassword />} />
+                  <Route exact path="/landing" element={securityCheck(<Landing />)} />
+                  <Route exact path="/fetching" element={securityCheck(<Fetching />)} />
+                  <Route exact path="/main" element={securityCheck(<Main />)} />
+                  <Route exact path="/createaccount" element={securityCheck(<CreateAccount />)} />
+                  <Route exact path="/forgetpassword" element={securityCheck(<ForgetPassword />)} />
               </Routes>
               <CustomDialog
-                  open={openDialog}
-                  setOpen={setOpenDialog}
+                  title="Testing dialog title"
+                  content="Testing dialog content"
               />
+              <Backdrop open={isLoading}/>
           </DialogContext.Provider>
       </>
       // {/*<header className="App-header">*/}

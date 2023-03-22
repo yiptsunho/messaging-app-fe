@@ -1,11 +1,12 @@
-import {Container, Grid} from "@mui/material";
-import ChatList from "./ChatList";
+import {Container} from "@mui/material";
 import MessageList from "./MessageList";
+import InputBar from "./InputBar";
 
 function ChatRoom () {
     return (
         <Container>
             <MessageList />
+            <InputBar />
         </Container>
     )
 };
