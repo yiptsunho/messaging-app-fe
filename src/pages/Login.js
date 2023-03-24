@@ -56,8 +56,10 @@ function Login (props) {
             setPasswordValid(false)
         }
         if (loginIdValid && passwordValid) {
-            navigate("/main")
+            sessionStorage.setItem('accessToken', 'fake token')
+            sessionStorage.setItem('username', params.loginId)
             setIsLogin(true)
+            navigate("/main")
         }
         // login(params, setIsLogin, navigate, setOpenDialog, refreshToken)
     };

@@ -1,5 +1,5 @@
 import ChatList from "./ChatList";
-import {Container, Grid, TextField} from "@mui/material";
+import { Container, Divider, Grid, TextField, Typography } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
@@ -8,19 +8,24 @@ function LeftPanel () {
     return (
         <React.Fragment>
             <Container>
-                <Grid container>
+                <Grid container height="5rem">
                     <Grid md={9}>
-                        Chats
+                        <Typography variant="h6">
+                            Chats
+                        </Typography>
                     </Grid>
                     <Grid md={3} display="flex" justifyContent="flex-end">
-                        Icon
+                        <Typography variant="h6">
+                            Icon
+                        </Typography>
                     </Grid>
                 </Grid>
-                <Grid container>
+                <Divider variant="middle" />
+                <Grid container paddingY="0.5rem">
                     <TextField
                         fullWidth
                         id="filled-search"
-                        defaultValue="Search.."
+                        placeholder="Search.."
                         type="search"
                         variant="filled"
                         InputProps={{

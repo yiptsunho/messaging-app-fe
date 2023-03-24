@@ -3,18 +3,21 @@
     "id": 1,
     "type": "text",
     "content": "This is the 1st message",
-    "time": ""
+    "time": "",
+    "from": "some guy"
   },
   {
     "id": 2,
     "type": "text",
     "content": "This is the 2nd message",
-    "time": ""
+    "time": "",
+    "from": "some guy"
   },
   {
     "id": 3,
     "type": "text",
     "content": "This is the 3rd message",
-    "time": ""
+    "time": "",
+    "from": "yiptsunho"
   }
 ]

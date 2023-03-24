@@ -4,7 +4,7 @@ import {Route, Routes} from "react-router-dom";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Fetching from "./pages/Fetching";
-import Main from "./pages/Main";
+import Main from "./pages/main/Main";
 import {createContext, useState} from "react";
 import CreateAccount from "./pages/CreateAccount";
 import ForgetPassword from "./pages/ForgetPassword";
@@ -13,7 +13,7 @@ import CustomDialog from "./components/CustomDialog";
 export const DialogContext = createContext({})
 
 function App() {
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(window.sessionStorage.getItem('accessToken') ? true : false);
     const [openDialog, setOpenDialog] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const securityCheck = (component) => {
