@@ -1,4 +1,4 @@
-import { Container, Divider, Grid } from "@mui/material";
+import { Container, Divider, Grid, Paper } from "@mui/material";
 import ChatRoom from "./ChatRoom";
 import ListItem from "@mui/material/ListItem";
 import IconButton from "@mui/material/IconButton";
@@ -10,37 +10,16 @@ import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
 import React, { createContext, useContext, useState } from "react"
 import InputBar from "./InputBar";
-import CallIcon from '@mui/icons-material/CallRounded';
+import CallIcon from '@mui/icons-material/CallOutlined';
 import _ from 'lodash';
-import RightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { MainContext } from "../Main";
+import dummyData from "../../../utils/Messages.json"
+import DefaultAvatar from "../../../components/DefaultAvatar";
 
 export const MiddlePanelContext = createContext({})
 
 function MiddlePanel() {
-    const [messages, setMessages] = useState([
-        {
-            "id": 1,
-            "type": "text",
-            "content": "This is the 1st message",
-            "time": "",
-            "from": "some guy"
-        },
-        {
-            "id": 2,
-            "type": "text",
-            "content": "This is the 2nd message",
-            "time": "",
-            "from": "some guy"
-        },
-        {
-            "id": 3,
-            "type": "text",
-            "content": "This is the 3rd message",
-            "time": "",
-            "from": "yiptsunho"
-        }
-    ])
+    const [messages, setMessages] = useState(dummyData)
 
     const sendMessage = (newMessage) => {
         let newMessageList = _.cloneDeep(messages)
@@ -51,43 +30,55 @@ function MiddlePanel() {
 
     return (
         <MiddlePanelContext.Provider value={{ messages, sendMessage }}>
-            <Grid container direction="column" justifyContent="space-between" height="100%">
-                <Grid container item height="5rem">
-                    <Container>
-                        <List>
-                            <ListItem
-                                secondaryAction={
-                                    <Grid>
-                                        <IconButton edge="end" aria-label="delete">
-                                            <CallIcon />
-                                        </IconButton>
-                                        <IconButton edge="end" aria-label="delete" onClick={toggleRightPanel}>
-                                            <RightIcon />
-                                        </IconButton>
-                                    </Grid>
-                                }
-                            >
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <FolderIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Jacky"
-                                    secondary="Last message"
-                                />
-                            </ListItem>
-                        </List>
-                    </Container>
+            <Paper elevation={0} sx={{ borderRadius: "16px", height: "100%", bgcolor: "#ECEFF4" }}>
+                <Grid container direction="column" justifyContent="space-between" height="100%">
+                    <Grid container item height="7.5%">
+                        <Container>
+                            <List disablePadding sx={{ paddingTop: "4px", paddingBottom: "4px" }}>
+                                <ListItem
+                                    secondaryAction={
+                                        <Grid>
+                                            <IconButton edge="end" aria-label="delete">
+                                                <Avatar sx={{ bgcolor: "#f1f3f4" }}>
+                                                    <CallIcon sx={{ color: "#344445" }} />
+                                                </Avatar>
+                                            </IconButton>
+                                            <IconButton edge="end" aria-label="delete" onClick={toggleRightPanel}>
+                                                <Avatar sx={{ bgcolor: "#f1f3f4" }}>
+                                                    <MoreIcon sx={{ color: "#344445" }} />
+                                                </Avatar>
+                                            </IconButton>
+                                        </Grid>
+                                    }
+                                >
+                                    <ListItemAvatar>
+                                        {false ?
+                                            <Avatar>
+                                                <FolderIcon />
+                                            </Avatar>
+                                            :
+                                            <DefaultAvatar
+                                                name="Dummy"
+                                            />
+                                        }
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary="Jacky"
+                                        secondary="Last message"
+                                    />
+                                </ListItem>
+                            </List>
+                        </Container>
+                    </Grid>
+                    <Divider variant="middle" />
+                    <Grid container item height="84%" sx={{ marginBottom: "auto" }}>
+                        <ChatRoom />
+                    </Grid>
+                    <Grid container item height="7.5%">
+                        <InputBar />
+                    </Grid>
                 </Grid>
-                <Divider variant="middle" />
-                <Grid container item sx={{ marginBottom: "auto" }}>
-                    <ChatRoom />
-                </Grid>
-                <Grid container item>
-                    <InputBar />
-                </Grid>
-            </Grid>
+            </Paper>
         </MiddlePanelContext.Provider>
     )
 };

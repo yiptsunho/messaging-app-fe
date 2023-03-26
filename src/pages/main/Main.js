@@ -7,33 +7,29 @@ import RightPanel from "./rightPanel/RightPanel";
 export const MainContext = createContext({});
 
 function Main() {
-    const [RightPanelOpened, setRightPanelOpened] = useState(false)
+    const [rightPanelCollapsed, setRightPanelCollapsed] = useState(true)
     const toggleRightPanel = () => {
-        if (RightPanelOpened) {
-            setRightPanelOpened(false)
-        } else {
-            setRightPanelOpened(true)
-        }
+        setRightPanelCollapsed(!rightPanelCollapsed)
     }
+    const mainBorderRadius = "20px"
 
     return (
-        <MainContext.Provider value={{ toggleRightPanel }}>
+        <MainContext.Provider value={{ rightPanelCollapsed, toggleRightPanel }}>
             <Container maxWidth="xl" height="100vh">
-                {/*main chatbox*/}
                 <Grid sx={{ mt: 2, height: "95vh" }}>
-                    <Paper elevation={3} sx={{ borderRadius: "4px", height: "100%" }}>
-                        <Grid container sx={{ height: "100%" }}>
-                            <Grid md={3} sx={{ background: "teal", borderTopLeftRadius: "4px", borderBottomLeftRadius: "4px" }}>
-                                <LeftPanel />
-                            </Grid>
-                            <Grid md={RightPanelOpened ? 6 : 9} sx={{ background: "bisque", borderTopRightRadius: "4px", borderBottomLeftRadius: "4px" }}>
-                                <MiddlePanel />
-                            </Grid>
-                            {RightPanelOpened &&
-                                <Grid md={3}>
+                    <Paper elevation={3} sx={{ borderRadius: mainBorderRadius, height: "100%" }}>
+                        <Grid container sx={{ height: "100%", paddingY: "1rem" }}>
+                            <Grid container sx={{ height: "100%" }}>
+                                <Grid md={3} sx={{ borderTopLeftRadius: mainBorderRadius, borderBottomLeftRadius: mainBorderRadius }}>
+                                    <LeftPanel />
+                                </Grid>
+                                <Grid md={rightPanelCollapsed ? 8 : 6} sx={{ borderTopRightRadius: mainBorderRadius, borderBottomLeftRadius: mainBorderRadius }}>
+                                    <MiddlePanel />
+                                </Grid>
+                                <Grid md={rightPanelCollapsed ? 1 : 3}>
                                     <RightPanel />
                                 </Grid>
-                            }
+                            </Grid>
                         </Grid>
                     </Paper>
                 </Grid>

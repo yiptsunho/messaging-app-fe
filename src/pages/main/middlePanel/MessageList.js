@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Message from "./Message";
-// import Messages from '../utils/Messages.json'
 import { Grid, Container } from "@mui/material";
 import { MiddlePanelContext } from './MiddlePanel';
 

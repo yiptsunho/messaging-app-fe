@@ -1,12 +1,14 @@
 import { Container } from "@mui/material";
-import { useState } from "react";
+import Scrollbars from "react-custom-scrollbars";
 import MessageList from "./MessageList";
 
 function ChatRoom() {
     return (
-        <Container id="chatroom" sx={{ paddingY: "0.5rem", overflow: "auto", height: "65vh" }}>
-            <MessageList />
-        </Container>
+        <Scrollbars autoHide style={{ height: "100%" }}>
+            <Container id="chatroom" sx={{ paddingY: "0.5rem" }}>
+                <MessageList />
+            </Container>
+        </Scrollbars>
     )
 };
 

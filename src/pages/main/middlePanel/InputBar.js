@@ -1,12 +1,10 @@
 import React, { useContext, useRef, useState } from 'react';
-import { IconButton, TextField, InputBase, Divider, Grid, Paper, Button } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import { IconButton, InputBase, Grid, Paper, Button } from "@mui/material";
 import StickerIcon from '@mui/icons-material/AutoAwesomeMotion';
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import FileIcon from '@mui/icons-material/InsertDriveFile';
 import { MiddlePanelContext } from './MiddlePanel';
-import { MainContext } from '../Main';
 
 function InputBar() {
     const [hasFile, setHasFile] = useState(false)
@@ -16,7 +14,7 @@ function InputBar() {
 
     return (
         <Grid container sx={{ padding: "1rem" }}>
-            <Paper elevation={2} sx={{ width: "100%", padding: "0.5rem", borderRadius: "0.5rem" }}>
+            <Paper elevation={3} sx={{ width: "100%", padding: "0.5rem", borderRadius: "1rem" }}>
                 <form
                     type="submit"
                     onSubmit={(event) => {
