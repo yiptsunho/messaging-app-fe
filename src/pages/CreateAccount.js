@@ -1,14 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { createNewAccount } from '../apis/UserApi'
-// import CustomDialog.js from '../components/CustomDialog.js';
 import UserForm from '../components/UserForm';
-import { USER } from '../utils/Constants';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-
-const theme = createTheme();
 
 function CreateNewAccount() {
     const navigate = useNavigate()
@@ -54,7 +48,6 @@ function CreateNewAccount() {
     }
 
     return (
-        <ThemeProvider theme={theme}>
             <Container maxWidth="md">
                 <CssBaseline />
                 <UserForm
@@ -78,8 +71,7 @@ function CreateNewAccount() {
                 {/*    rightAction={dialogRightAction.current}*/}
                 {/*    leftLabel='Cancel'*/}
                 {/*/>*/}
-            </Container>
-        </ThemeProvider>
+        </Container>
     )
 }
 

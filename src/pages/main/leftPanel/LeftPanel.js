@@ -52,8 +52,8 @@ function LeftPanel() {
                 </Grid>
             </Grid>
             <Container disableGutters sx={{ paddingLeft: "16px", paddingRight: "8px", height: "7.5%", display: "flex", alignItems: "center" }}>
-                <Grid md={9}>
-                    <Typography>
+                <Grid md={4}>
+                    <Typography sx={{ fontWeight: "bold" }}>
                         Last Chats
                     </Typography>
                 </Grid>

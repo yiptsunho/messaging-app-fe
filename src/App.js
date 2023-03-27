@@ -21,8 +21,24 @@ const theme = createTheme({
             light: "#E0F4F1",
             dark: ""
         },
-        // grey
+        // also green
         secondary: {
+            // 
+            main: "#007A67",
+            // 
+            light: "#D1E7E8",
+            dark: ""
+        },
+        // another green
+        third: {
+            // 
+            main: "#0BA78E",
+            // 
+            light: "#0BA78E",
+            dark: ""
+        },
+        // grey
+        background: {
             // main is for main page background
             main: "#DCDFE6",
             // light is for chat room background
@@ -46,8 +62,8 @@ function App() {
     }
 
     return (
-      <>
-          <DialogContext.Provider value={{ openDialog, setOpenDialog, setIsLoading }}>
+        <>
+            <DialogContext.Provider value={{ openDialog, setOpenDialog, setIsLoading }}>
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <Routes>
@@ -64,22 +80,8 @@ function App() {
                     />
                     <Backdrop open={isLoading} />
                 </ThemeProvider>
-          </DialogContext.Provider>
-      </>
-      // {/*<header className="App-header">*/}
-      // {/*  <img src={logo} className="App-logo" alt="logo" />*/}
-      // {/*  <p>*/}
-      // {/*    Edit <code>src/App.js</code> and save to reload.*/}
-      // {/*  </p>*/}
-      // {/*  <a*/}
-      // {/*    className="App-link"*/}
-      // {/*    href="https://reactjs.org"*/}
-      // {/*    target="_blank"*/}
-      // {/*    rel="noopener noreferrer"*/}
-      // {/*  >*/}
-      // {/*    Learn React*/}
-      // {/*  </a>*/}
-      // {/*</header>*/}
+            </DialogContext.Provider>
+        </>
   );
 }
 
