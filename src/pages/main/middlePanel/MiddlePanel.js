@@ -33,8 +33,8 @@ function MiddlePanel() {
             <Paper elevation={0} sx={{ borderRadius: "16px", height: "100%", bgcolor: "#ECEFF4" }}>
                 <Grid container direction="column" justifyContent="space-between" height="100%">
                     <Grid container item height="7.5%">
-                        <Container>
-                            <List disablePadding sx={{ paddingTop: "4px", paddingBottom: "4px" }}>
+                        <Container sx={{ height: "100%" }}>
+                            <List disablePadding sx={{ paddingTop: "4px", paddingBottom: "4px", height: "inherit" }}>
                                 <ListItem
                                     secondaryAction={
                                         <Grid>
@@ -43,13 +43,9 @@ function MiddlePanel() {
                                                     <CallIcon sx={{ color: "#344445" }} />
                                                 </Avatar>
                                             </IconButton>
-                                            <IconButton edge="end" aria-label="delete" onClick={toggleRightPanel}>
-                                                <Avatar sx={{ bgcolor: "#f1f3f4" }}>
-                                                    <MoreIcon sx={{ color: "#344445" }} />
-                                                </Avatar>
-                                            </IconButton>
                                         </Grid>
                                     }
+                                    sx={{ height: "inherit" }}
                                 >
                                     <ListItemAvatar>
                                         {false ?

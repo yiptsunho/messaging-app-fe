@@ -11,35 +11,14 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import DefaultAvatar from '../../../components/DefaultAvatar';
 import Scrollbars from 'react-custom-scrollbars';
 
-// const theme = createTheme({
-//     components: {
-//         // Name of the component
-//         ListItemSecondaryAction: {
-//             styleOverrides: {
-//                 // Name of the slot
-//                 root: {
-//                     // Some CSS
-//                     color: "white",
-//                 },
-//             },
-//         },
-//     },
-// });
-
 function ContactHistory() {
     return (
-        // <ThemeProvider theme={theme}>
-        <Grid>
-            <List sx={{ height: "100%" }}>
+        <List sx={{ height: "100%" }}>
                 <Scrollbars autoHide style={{ height: "100%" }}>
                     {dummyContactHistory.map(contact => {
                         return (
                             <ListItem>
-                                <ListItemButton
-                                    sx={{
-                                        borderRadius: "8px"
-                                    }}
-                                >
+                                <ListItemButton sx={{ borderRadius: "8px" }}>
                                     <ListItemAvatar>
                                         {contact.image ?
                                             <Avatar>
@@ -52,14 +31,18 @@ function ContactHistory() {
                                         }
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={contact.name}
-                                        secondary={contact.lastMessage}
+                                        primary={
+                                            <Typography sx={{ fontWeight: "bold" }}>
+                                                {contact.name}
+                                            </Typography>
+                                        }
+                                        secondary={
+                                            <Typography variant="subtitle2">
+                                                {contact.lastMessage}
+                                            </Typography>
+                                        }
                                     />
-                                    <ListItemSecondaryAction
-                                        sx={{
-                                            top: "25%"
-                                        }}
-                                    >
+                                    <ListItemSecondaryAction sx={{ top: "25%" }}>
                                         <Typography variant='body2'>
                                             {contact.lastUpdateTime}
                                         </Typography>
@@ -69,8 +52,7 @@ function ContactHistory() {
                         )
                     })}
                 </Scrollbars>
-            </List>
-        </Grid>
+        </List>
     )
 };
 

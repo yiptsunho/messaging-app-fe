@@ -3,11 +3,13 @@ import { Container, Divider, FilledInput, Grid, IconButton, Typography } from "@
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import MoreIcon from '@mui/icons-material/MoreVert';
 
 function LeftPanel() {
     return (
         <React.Fragment>
-            <Container sx={{ height: "7.5%" }}>
+            <Container sx={{ height: "7.5%", display: "flex", alignItems: "center" }}>
                 <Grid container>
                     <Grid md={9}>
                         <Typography variant="h6">
@@ -22,8 +24,7 @@ function LeftPanel() {
                 </Grid>
             </Container>
                 <Divider variant="middle" />
-            {/* <Container sx={{ height: "92.5%" }}> */}
-            <Grid container paddingX="16px">
+            <Grid container paddingX="16px" height="7%">
                 <Grid container paddingY="0.5rem">
                     <FilledInput
                         fullWidth
@@ -50,8 +51,25 @@ function LeftPanel() {
                     />
                 </Grid>
             </Grid>
-            <ContactHistory />
-            {/* </Container> */}
+            <Container disableGutters sx={{ paddingLeft: "16px", paddingRight: "8px", height: "7.5%", display: "flex", alignItems: "center" }}>
+                <Grid md={9}>
+                    <Typography>
+                        Last Chats
+                    </Typography>
+                </Grid>
+                <Grid>
+                    <IconButton>
+                        <AddIcon />
+                    </IconButton>
+                    <IconButton>
+                        <MoreIcon />
+                    </IconButton>
+                </Grid>
+            </Container>
+            <Grid height="77%">
+                <Divider />
+                <ContactHistory />
+            </Grid>
         </React.Fragment>
     )
 };

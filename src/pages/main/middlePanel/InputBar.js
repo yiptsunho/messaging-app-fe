@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { IconButton, InputBase, Grid, Paper, Button } from "@mui/material";
+import { IconButton, InputBase, Grid, Paper, Button, useMediaQuery } from "@mui/material";
 import StickerIcon from '@mui/icons-material/AutoAwesomeMotion';
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
@@ -11,9 +11,14 @@ function InputBar() {
     const { sendMessage } = useContext(MiddlePanelContext)
     const currentUser = window.sessionStorage.getItem('username')
     const messageContent = useRef(null)
+    const xs = useMediaQuery('(max-width:0px)')
+    const sm = useMediaQuery('(max-width:600px)')
+    const md = useMediaQuery('(max-width:900px)')
+    const lg = useMediaQuery('(max-width:1200px)')
+    const xl = useMediaQuery('(max-width:1536px)')
 
     return (
-        <Grid container sx={{ padding: "1rem" }}>
+        <Grid container sx={{ paddingLeft: "1rem", paddingRight: "1rem", paddingBottom: "1rem" }}>
             <Paper elevation={3} sx={{ width: "100%", padding: "0.5rem", borderRadius: "1rem" }}>
                 <form
                     type="submit"
@@ -32,12 +37,12 @@ function InputBar() {
                         }
                     }}>
                     <Grid container>
-                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                            <AddIcon />
+                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"}>
+                            <AddIcon fontSize={lg ? "small" : "medium"} />
                         </IconButton>
                         {hasFile &&
-                            <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                                <FileIcon />
+                            <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"}>
+                                <FileIcon fontSize={lg ? "small" : "medium"} />
                             </IconButton>
                         }
                         <InputBase
@@ -45,8 +50,8 @@ function InputBar() {
                             placeholder="Type here.."
                             inputRef={messageContent}
                         />
-                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                            <StickerIcon />
+                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"}>
+                            <StickerIcon fontSize={lg ? "small" : "medium"} />
                         </IconButton>
                         {/* <Divider sx={{ height: "auto", m: 0.5 }} orientation="vertical" /> */}
                         <Button
@@ -65,8 +70,11 @@ function InputBar() {
                                     messageContent.current.value = null
                                 }
                             }}
-                            sx={{ p: '10px', minWidth: "unset", borderRadius: "10px" }}>
-                            <SendIcon />
+                            sx={{ p: '10px', minWidth: "unset", borderRadius: "10px" }}
+                            // xl -> "medium", others -> "small"
+                            size={lg ? "small" : "medium"}
+                        >
+                            <SendIcon fontSize={lg ? "small" : "medium"} />
                         </Button>
                     </Grid>
                 </form>

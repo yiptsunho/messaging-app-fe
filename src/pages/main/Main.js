@@ -15,8 +15,8 @@ function Main() {
 
     return (
         <MainContext.Provider value={{ rightPanelCollapsed, toggleRightPanel }}>
-            <Container maxWidth="xl" height="100vh">
-                <Grid sx={{ mt: 2, height: "95vh" }}>
+            <Container maxWidth="xl" sx={{ height: "100vh", minHeight: "700px", display: "flex", alignItems: "center" }} >
+                <Grid sx={{ height: "95vh", width: "100%" }}>
                     <Paper elevation={3} sx={{ borderRadius: mainBorderRadius, height: "100%" }}>
                         <Grid container sx={{ height: "100%", paddingY: "1rem" }}>
                             <Grid container sx={{ height: "100%" }}>

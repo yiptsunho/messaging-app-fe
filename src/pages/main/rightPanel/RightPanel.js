@@ -1,4 +1,4 @@
-import { Avatar, Box, Container, Divider, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, Divider, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
 import React, { useContext } from 'react';
 import FolderIcon from '@mui/icons-material/Folder';
 import LinkIcon from '@mui/icons-material/Link';
@@ -18,107 +18,61 @@ function RightPanel() {
         {
             name: "Documents",
             number: 126,
-            size: "193MB"
+            size: "193MB",
+            bgColor: "#DFE1F9",
+            icon: <FileIcon sx={{ color: "#5A68DF" }} />
         },
         {
             name: "Photos",
             number: 53,
-            size: "321MB"
+            size: "321MB",
+            bgColor: "#F4EACF",
+            icon: <PhotoIcon sx={{ color: "#C4B07A" }} />
         },
         {
             name: "Movies",
             number: 3,
-            size: "210MB"
+            size: "210MB",
+            bgColor: "#E4F7F9",
+            icon: <VideoIcon sx={{ color: "#6DBEC6" }} />
         },
         {
             name: "Other",
             number: 49,
-            size: "194MB"
+            size: "194MB",
+            bgColor: "#FFE0DA",
+            icon: <GifIcon sx={{ color: "#BE6E5F" }} />
+        },
+        {
+            name: "Link",
+            number: 49,
+            size: "194MB",
+            bgColor: "#E0EED5",
+            icon: <LinkIcon sx={{ color: "#76A056", rotate: "-45deg" }} />
         },
     ]
 
     return (
         <React.Fragment>
-            {rightPanelCollapsed ?
-                <React.Fragment>
-                    <Container sx={{ height: "7.5%" }}>
-                        <Grid container justifyContent="center">
-                            <Box
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="center"
-                            >
-                                <IconButton size="medium" onClick={toggleRightPanel}>
-                                    <Avatar sx={{ bgcolor: "#f1f3f4" }}>
-                                        <DoubleLeftIcon sx={{ color: "#344445" }} />
-                                    </Avatar>
-                                </IconButton>
-                            </Box>
-                        </Grid>
-                    </Container>
-                    <Divider variant="middle" />
-                    <Container sx={{ height: "92.5%" }}>
-                        <Grid container paddingY="0.5rem">
-                            <Grid container justifyContent="center">
-                                <Grid container md={8}>
-                                    <Grid container justifyContent="center">
-                                        <Avatar>H</Avatar>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid container md={12} rowSpacing={2} justifyContent="center">
-                            <Grid item>
-                                Files
-                            </Grid>
-                            <Grid item>
-                                <IconButton>
-                                    <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#DFE1F9" }}>
-                                        <FileIcon sx={{ color: "#5A68DF" }} />
-                                    </Avatar>
-                                </IconButton>
-                            </Grid>
-                            <Grid item>
-                                <IconButton>
-                                    <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#F4EACF" }}>
-                                        <PhotoIcon sx={{ color: "#C4B07A" }} />
-                                    </Avatar>
-                                </IconButton>
-                            </Grid>
-                            <Grid item>
-                                <IconButton>
-                                    <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#E4F7F9" }}>
-                                        <VideoIcon sx={{ color: "#6DBEC6" }} />
-                                    </Avatar>
-                                </IconButton>
-                            </Grid>
-                            <Grid item>
-                                <IconButton>
-                                    <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#FFE0DA" }}>
-                                        <GifIcon sx={{ color: "#BE6E5F" }} />
-                                    </Avatar>
-                                </IconButton>
-                            </Grid>
-                            <Grid item>
-                                <IconButton>
-                                    <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#E0EED5" }}>
-                                        <LinkIcon sx={{ color: "#76A056", rotate: "-45deg" }} />
-                                    </Avatar>
-                                </IconButton>
-                            </Grid>
-                        </Grid>
-                    </Container>
-                    <Grid container justifyContent="center" paddingX="0.5rem">
-
-                    </Grid>
-                </React.Fragment>
-                :
-                <React.Fragment>
-                    <Container>
-                        <Grid container height="5rem" justifyContent="space-between" alignItems="center" columnSpacing={1}>
+            <Container sx={{ height: "7.5%", alignItems: "center", display: "flex" }}>
+                <Grid container justifyContent={rightPanelCollapsed ? "center" : "space-between"} alignItems="center" columnSpacing={1}>
+                    {rightPanelCollapsed ? 
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            <IconButton size="medium" onClick={toggleRightPanel}>
+                                <Avatar variant="rounded" sx={{ bgcolor: "#f1f3f4", maxHeight: "100%" }}>
+                                    <DoubleLeftIcon sx={{ color: "#344445" }} />
+                                </Avatar>
+                            </IconButton>
+                        </Box>
+                        :
+                        <React.Fragment>
                             <Grid item md={2} display="flex" justifyContent="center">
                                 <IconButton size="medium" onClick={toggleRightPanel}>
-                                    <Avatar sx={{ bgcolor: "#f1f3f4" }}>
+                                    <Avatar variant="rounded" sx={{ bgcolor: "#f1f3f4" }}>
                                         <DoubleRightIcon sx={{ color: "#344445" }} />
                                     </Avatar>
                                 </IconButton>
@@ -128,52 +82,90 @@ function RightPanel() {
                                     Shared Files
                                 </Typography>
                             </Grid>
-                        </Grid>
-                    </Container>
-                    <Divider variant="middle" />
-                    <Container>
-                        <Grid container paddingY="0.5rem">
-                            <Grid container justifyContent="center">
-                                <Grid container md={8}>
-                                    <Grid container justifyContent="center">
-                                        <Avatar>H</Avatar>
+                        </React.Fragment>
+                    }
+                </Grid>
+            </Container>
+            <Divider variant="middle" />
+            {rightPanelCollapsed ?
+                <Container sx={{ height: "92.5%" }}>
+                    <Grid container paddingY="0.5rem" justifyContent="center">
+                        <Avatar
+                            sx={{ width: 60, height: 60 }}
+                        >
+                            H
+                        </Avatar>
+                    </Grid>
+                    <Grid container md={12} rowSpacing={2} justifyContent="center">
+                            <Grid item>
+                            Files
+                            </Grid>
+                        {
+                            fileList.map(file => {
+                                return (
+                                    <Grid item>
+                                        <IconButton>
+                                            <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: file.bgColor }}>
+                                                {file.icon}
+                                            </Avatar>
+                                        </IconButton>
                                     </Grid>
-                                    <Grid container justifyContent="center">
-                                        Contact name
-                                    </Grid>
+                                )
+                            })
+                        }
+                    </Grid>
+                </Container>
+                :
+                <React.Fragment>
+                    <Container disableGutters sx={{ height: "40%", display: "flex", flexWrap: "wrap", alignContent: "space-evenly" }}>
+                        <Container sx={{ display: "flex", justifyContent: "center" }}>
+                            <Grid container md={8} rowSpacing={2}>
+                                <Grid container item justifyContent="center">
+                                    <Avatar
+                                        sx={{ width: 100, height: 100 }}
+                                    >
+                                        H
+                                    </Avatar>
+                                </Grid>
+                                <Grid container item justifyContent="center">
+                                    <Typography variant="h6">
+                                        Jacky
+                                    </Typography>
                                 </Grid>
                             </Grid>
-                            <Grid container justifyContent="center">
-                                <Grid container md={12} justifyContent="space-between">
-                                    <Grid item justifyContent="center">
-                                        <Paper sx={{ borderRadius: "0.5rem", padding: "1rem" }}>
-                                            <Grid container>
-                                                <Grid item md={6} alignItems="center" display="flex">
-                                                    <FolderIcon />
-                                                </Grid>
-                                                <Grid item md={6}>
-                                                    Files
-                                                    232
-                                                </Grid>
+                        </Container>
+                        <Container disableGutters sx={{ paddingX: "16px", justifyContent: "center" }}>
+                            <Grid container md={12} justifyContent="space-between">
+                                <Grid item md={6} display="flex" justifyContent="start">
+                                    <Button variant="contained" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%" }}>
+                                        <Grid container>
+                                            <Grid item md={6} alignItems="center" display="flex">
+                                                <FolderIcon fontSize="large" />
                                             </Grid>
-                                        </Paper>
-                                    </Grid>
-                                    <Grid item justifyContent="center">
-                                        <Paper sx={{ borderRadius: "0.5rem", padding: "1rem" }}>
-                                            <Grid container>
-                                                <Grid item md={6} alignItems="center" display="flex">
-                                                    <LinkIcon />
-                                                </Grid>
-                                                <Grid item md={6}>
-                                                    Links
-                                                    45
-                                                </Grid>
+                                            <Grid item md={6}>
+                                                Files
+                                                <br />
+                                                232
                                             </Grid>
-                                        </Paper>
-                                    </Grid>
+                                        </Grid>
+                                    </Button>
+                                </Grid>
+                                <Grid item md={6} display="flex" justifyContent="end">
+                                    <Button variant="contained" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%" }}>
+                                        <Grid container>
+                                            <Grid item md={6} alignItems="center" display="flex">
+                                                <LinkIcon fontSize="large" />
+                                            </Grid>
+                                            <Grid item md={6}>
+                                                Links
+                                                <br />
+                                                45
+                                            </Grid>
+                                        </Grid>
+                                    </Button>
                                 </Grid>
                             </Grid>
-                        </Grid>
+                        </Container>
                     </Container>
                     <Grid container justifyContent="center" paddingX="0.5rem">
                         <Grid container md={12}>
@@ -189,86 +181,42 @@ function RightPanel() {
                             </Grid>
                             <Grid container alignItems="center">
                                 <List disablePadding sx={{ width: "100%", paddingLeft: "0.5rem" }}>
-                                    <ListItem
-                                        disablePadding
-                                        secondaryAction={
-                                            <IconButton edge="end" aria-label="delete">
-                                                <SingleRightIcon />
-                                            </IconButton>
-                                        }
-                                    >
-                                        <ListItemButton sx={{ paddingX: "0px", borderRadius: "8px" }}>
-                                            <ListItemIcon>
-                                                <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#DFE1F9" }}>
-                                                    <FileIcon sx={{ color: "#5A68DF" }} />
-                                                </Avatar>
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary="Documents"
-                                                secondary="126 files, 193MB"
-                                            />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    <ListItem
-                                        disablePadding
-                                        secondaryAction={
-                                            <IconButton edge="end" aria-label="delete">
-                                                <SingleRightIcon />
-                                            </IconButton>
-                                        }
-                                    >
-                                        <ListItemButton sx={{ paddingX: "0px", borderRadius: "8px" }}>
-                                            <ListItemIcon>
-                                                <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#F4EACF" }}>
-                                                    <PhotoIcon sx={{ color: "#C4B07A" }} />
-                                                </Avatar>
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary="Photos"
-                                                secondary="53 files, 321MB"
-                                            />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    <ListItem
-                                        disablePadding
-                                        secondaryAction={
-                                            <IconButton edge="end" aria-label="delete">
-                                                <SingleRightIcon />
-                                            </IconButton>
-                                        }
-                                    >
-                                        <ListItemButton sx={{ paddingX: "0px", borderRadius: "8px" }}>
-                                            <ListItemIcon>
-                                                <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#E4F7F9" }}>
-                                                    <VideoIcon sx={{ color: "#6DBEC6" }} />
-                                                </Avatar>
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary="Videos"
-                                                secondary="3 files, 210MB"
-                                            />
-                                        </ListItemButton>
-                                    </ListItem>
-                                    <ListItem
-                                        disablePadding
-                                        secondaryAction={
-                                            <IconButton edge="end" aria-label="delete">
-                                                <SingleRightIcon />
-                                            </IconButton>
-                                        }
-                                    >
-                                        <ListItemButton sx={{ paddingX: "0px", borderRadius: "8px" }}>
-                                            <ListItemIcon>
-                                                <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: "#FFE0DA" }}>
-                                                    <GifIcon sx={{ color: "#BE6E5F" }} />
-                                                </Avatar>
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary="Other"
-                                                secondary="49 files, 194MB"
-                                            />
-                                        </ListItemButton>
-                                    </ListItem>
+                                    {
+                                        fileList.map(file => {
+                                            if (file.name !== "Link") {
+                                                return (
+                                                    <ListItem
+                                                        disablePadding
+                                                        secondaryAction={
+                                                            <IconButton edge="end" aria-label="delete">
+                                                                <SingleRightIcon />
+                                                            </IconButton>
+                                                        }
+                                                    >
+                                                        <ListItemButton sx={{ paddingX: "0px", borderRadius: "8px" }}>
+                                                            <ListItemIcon>
+                                                                <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: file.bgColor }}>
+                                                                    {file.icon}
+                                                                </Avatar>
+                                                            </ListItemIcon>
+                                                            <ListItemText
+                                                                primary={
+                                                                    <Typography sx={{ fontWeight: "bold" }}>
+                                                                        {file.name}
+                                                                    </Typography>
+                                                                }
+                                                                secondary={
+                                                                    <Typography variant="subtitle2">
+                                                                        {`${file.number} files, ${file.size}`}
+                                                                    </Typography>
+                                                                }
+                                                            />
+                                                        </ListItemButton>
+                                                    </ListItem>
+                                                )
+                                            }
+                                        })
+                                    }
                                 </List>
                             </Grid>
                         </Grid>
