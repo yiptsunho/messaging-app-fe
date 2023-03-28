@@ -26,18 +26,18 @@ function Main() {
     const [publicChats, setpublicChats] = useState([])
     const [privateChats, setprivateChats] = useState(new Map())
     const { setOpenDialog } = useContext(DialogContext)
-    const dialogParams = {}
+    let dialogParams;
     const toggleRightPanel = () => {
         setRightPanelCollapsed(!rightPanelCollapsed)
     }
-    const stompClient = null
+    let stompClient = null
 
     useEffect(() => {
         connectWs()
     }, [])
 
     const connectWs = () => {
-        const Sock = new SockJS("/ws")
+        const Sock = new SockJS("http://localhost:3000/ws")
         stompClient = over(Sock)
         stompClient.connect({}, connectSuccessCallback, connectFailCallback)
     }
@@ -46,6 +46,17 @@ function Main() {
         setUserData({ ...userData, "connected": true })
         stompClient.subscribe("/chatroom/public", onPublicMessageReceived)
         stompClient.subscribe(`/user/${userData.senderId}/private`, onPrivateMessageReceived)
+        userJoin()
+    }
+
+    const userJoin = () => {
+        if (stompClient) {
+            const chatMessage = {
+                senderId: userId,
+                status: "JOIN"
+            };
+            stompClient.send("/app/message", {}, JSON.stringify(chatMessage))
+        }
     }
 
     const connectFailCallback = (err) => {
@@ -90,6 +101,29 @@ function Main() {
         setprivateChats(new Map(newprivateChats))
     }
 
+    const sendPublicMessage = () => {
+        if (stompClient) {
+            const chatMessage = {
+                senderId: userId,
+                message: "Dummy message",
+                status: "MESSAGE"
+            };
+            stompClient.send("/app/message", {}, JSON.stringify(chatMessage))
+        }
+    }
+
+    const sendPrivateMessage = () => {
+        if (stompClient) {
+            const chatMessage = {
+                senderId: userId,
+                receiverId: userData.receiverId,
+                message: "Dummy message",
+                status: "MESSAGE"
+            };
+            stompClient.send("/app/private-message", {}, JSON.stringify(chatMessage))
+        }
+    }
+
     return (
         <div>
             {
@@ -104,6 +138,8 @@ function Main() {
                                 )
                             })
                         }
+                        <input></input>
+                        <button onClick={sendPrivateMessage}>Send Message</button>
                     </div>
                     : "Connecting..."
             }
