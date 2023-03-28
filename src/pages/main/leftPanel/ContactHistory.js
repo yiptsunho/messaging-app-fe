@@ -11,13 +11,17 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import DefaultAvatar from '../../../components/DefaultAvatar';
 import Scrollbars from 'react-custom-scrollbars';
 
-function ContactHistory() {
+function ContactHistory(props) {
+    const { contactHistory } = props;
+
     return (
         <List sx={{ height: "100%" }}>
                 <Scrollbars autoHide style={{ height: "100%" }}>
+                {/* {contactHistory.map(contact => { */}
                     {dummyContactHistory.map(contact => {
                         return (
                             <ListItem>
+                                {/* <ListItemButton onClick={() => fetchMessages(contact.id)} sx={{ borderRadius: "8px" }}> */}
                                 <ListItemButton sx={{ borderRadius: "8px" }}>
                                     <ListItemAvatar>
                                         {contact.image ?

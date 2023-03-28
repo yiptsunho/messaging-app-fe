@@ -13,7 +13,7 @@ import DoubleLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import DoubleRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 function RightPanel() {
-    const { rightPanelCollapsed, toggleRightPanel } = useContext(MainContext)
+    const { rightPanelCollapsed, toggleRightPanel, senderId } = useContext(MainContext)
     const fileList = [
         {
             name: "Documents",

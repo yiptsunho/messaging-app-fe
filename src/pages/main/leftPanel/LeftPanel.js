@@ -2,11 +2,20 @@ import ContactHistory from "./ContactHistory";
 import { Container, Divider, FilledInput, Grid, IconButton, Typography } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from '@mui/icons-material/Search';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { MainContext } from "../Main";
 
 function LeftPanel() {
+    const [contactHistory, setContactHistory] = useState({})
+    const { receiverData, setReceiverData } = useContext(MainContext)
+
+    useEffect(() => {
+        // call api to fetch contact history
+        // setContactHistory(responseData.data)
+    }, [])
+
     return (
         <React.Fragment>
             <Container sx={{ height: "7.5%", display: "flex", alignItems: "center" }}>
@@ -68,7 +77,10 @@ function LeftPanel() {
             </Container>
             <Grid height="77%">
                 <Divider />
-                <ContactHistory />
+                <ContactHistory
+                    contactHistory={contactHistory}
+
+                />
             </Grid>
         </React.Fragment>
     )

@@ -36,9 +36,9 @@ function Login (props) {
     const [loginIdValid, setLoginIdValid] = useState(true)
     const [passwordValid, setPasswordValid] = useState(true)
 
-    useEffect(() => {
-        window.sessionStorage.clear()
-    }, [])
+    // useEffect(() => {
+    //     window.sessionStorage.clear()
+    // }, [])
 
     const handleSubmit = (event) => {
 
@@ -55,13 +55,24 @@ function Login (props) {
         if (params.password !== "123456") {
             setPasswordValid(false)
         }
+        // dummy login function
         if (loginIdValid && passwordValid) {
             sessionStorage.setItem('accessToken', 'fake token')
             sessionStorage.setItem('username', params.loginId)
             setIsLogin(true)
-            navigate("/main")
+            navigate("/main", { state: { userId: params.loginId } })
+
         }
+        // real login function
         // login(params, setIsLogin, navigate, setOpenDialog, refreshToken)
+
+        const loginSuccessCallback = () => {
+
+        }
+
+        const loginFailCallback = () => {
+
+        }
     };
 
     return (

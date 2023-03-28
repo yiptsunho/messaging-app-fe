@@ -11,11 +11,7 @@ function InputBar() {
     const { sendMessage } = useContext(MiddlePanelContext)
     const currentUser = window.sessionStorage.getItem('username')
     const messageContent = useRef(null)
-    const xs = useMediaQuery('(max-width:0px)')
-    const sm = useMediaQuery('(max-width:600px)')
-    const md = useMediaQuery('(max-width:900px)')
     const lg = useMediaQuery('(max-width:1200px)')
-    const xl = useMediaQuery('(max-width:1536px)')
 
     return (
         <Grid container sx={{ paddingLeft: "1rem", paddingRight: "1rem", paddingBottom: "1rem" }}>

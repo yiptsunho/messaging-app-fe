@@ -20,13 +20,13 @@ export const MiddlePanelContext = createContext({})
 
 function MiddlePanel() {
     const [messages, setMessages] = useState(dummyData)
+    const { publicChats, privateChats, receiverData } = useContext(MainContext)
 
     const sendMessage = (newMessage) => {
         let newMessageList = _.cloneDeep(messages)
         newMessageList.push(newMessage)
         setMessages(newMessageList)
     }
-    const { toggleRightPanel } = useContext(MainContext)
 
     return (
         <MiddlePanelContext.Provider value={{ messages, sendMessage }}>
@@ -50,17 +50,17 @@ function MiddlePanel() {
                                     <ListItemAvatar>
                                         {false ?
                                             <Avatar>
-                                                <FolderIcon />
+                                                <DefaultAvatar name={receiverData.groupName ?? receiverData.receiverName} />
                                             </Avatar>
                                             :
                                             <DefaultAvatar
-                                                name="Dummy"
+                                                name={receiverData.isGroup ? receiverData.groupName : receiverData.receiverName}
                                             />
                                         }
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary="Jacky"
-                                        secondary="Last message"
+                                        primary={receiverData.isGroup ? receiverData.groupName : receiverData.receiverName}
+                                        secondary={receiverData.isGroup ? publicChats.get(receiverData.groupId) : privateChats.get(receiverData.receiverId)}
                                     />
                                 </ListItem>
                             </List>
@@ -68,7 +68,11 @@ function MiddlePanel() {
                     </Grid>
                     <Divider variant="middle" />
                     <Grid container item height="84%" sx={{ marginBottom: "auto" }}>
-                        <ChatRoom />
+                        <ChatRoom
+                            privateChats={privateChats.get(receiverData.receiverId ?? null) ?? []}
+                            publicChats={publicChats.get(receiverData.groupId ?? null) ?? []}
+                            isGroup={receiverData.isGroup}
+                        />
                     </Grid>
                     <Grid container item height="7.5%">
                         <InputBar />
