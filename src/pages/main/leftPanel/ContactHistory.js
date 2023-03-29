@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Grid, ListItemButton, Typography } from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -10,9 +10,11 @@ import dummyContactHistory from '../../../utils/ContactHistory.json'
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import DefaultAvatar from '../../../components/DefaultAvatar';
 import Scrollbars from 'react-custom-scrollbars';
+import { MainContext } from '../Main';
 
 function ContactHistory(props) {
     const { contactHistory } = props;
+    const { roomRef, joinRoom } = useContext(MainContext);
 
     return (
         <List sx={{ height: "100%" }}>
@@ -22,7 +24,10 @@ function ContactHistory(props) {
                         return (
                             <ListItem>
                                 {/* <ListItemButton onClick={() => fetchMessages(contact.id)} sx={{ borderRadius: "8px" }}> */}
-                                <ListItemButton sx={{ borderRadius: "8px" }}>
+                                <ListItemButton sx={{ borderRadius: "8px" }} onClick={() => {
+                                    roomRef.current = contact.id
+                                    joinRoom()
+                                }}>
                                     <ListItemAvatar>
                                         {contact.image ?
                                             <Avatar>

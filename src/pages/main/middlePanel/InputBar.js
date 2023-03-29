@@ -4,11 +4,11 @@ import StickerIcon from '@mui/icons-material/AutoAwesomeMotion';
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import FileIcon from '@mui/icons-material/InsertDriveFile';
-import { MiddlePanelContext } from './MiddlePanel';
+import { MainContext } from '../Main';
 
 function InputBar() {
     const [hasFile, setHasFile] = useState(false)
-    const { sendMessage } = useContext(MiddlePanelContext)
+    const { sendMessage } = useContext(MainContext)
     const currentUser = window.sessionStorage.getItem('username')
     const messageContent = useRef(null)
     const lg = useMediaQuery('(max-width:1200px)')

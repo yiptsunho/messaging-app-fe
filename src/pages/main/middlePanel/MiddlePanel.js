@@ -20,16 +20,10 @@ export const MiddlePanelContext = createContext({})
 
 function MiddlePanel() {
     const [messages, setMessages] = useState(dummyData)
-    const { publicChats, privateChats, receiverData } = useContext(MainContext)
-
-    const sendMessage = (newMessage) => {
-        let newMessageList = _.cloneDeep(messages)
-        newMessageList.push(newMessage)
-        setMessages(newMessageList)
-    }
+    const { groupChats, privateChats, isGroup } = useContext(MainContext)
 
     return (
-        <MiddlePanelContext.Provider value={{ messages, sendMessage }}>
+        <MiddlePanelContext.Provider value={{ messages }}>
             <Paper elevation={0} sx={{ borderRadius: "16px", height: "100%", bgcolor: "#ECEFF4" }}>
                 <Grid container direction="column" justifyContent="space-between" height="100%">
                     <Grid container item height="7.5%">
@@ -50,17 +44,21 @@ function MiddlePanel() {
                                     <ListItemAvatar>
                                         {false ?
                                             <Avatar>
-                                                <DefaultAvatar name={receiverData.groupName ?? receiverData.receiverName} />
+                                                <DefaultAvatar name="Dummy contact" />
+                                                {/* <DefaultAvatar name={receiverData.groupName ?? receiverData.receiverName} /> */}
                                             </Avatar>
                                             :
-                                            <DefaultAvatar
-                                                name={receiverData.isGroup ? receiverData.groupName : receiverData.receiverName}
-                                            />
+                                            <DefaultAvatar name="Dummy contact" />
+                                            // <DefaultAvatar
+                                            //     name={receiverData.isGroup ? receiverData.groupName : receiverData.receiverName}
+                                            // />
                                         }
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={receiverData.isGroup ? receiverData.groupName : receiverData.receiverName}
-                                        secondary={receiverData.isGroup ? publicChats.get(receiverData.groupId) : privateChats.get(receiverData.receiverId)}
+                                        // primary={receiverData.isGroup ? receiverData.groupName : receiverData.receiverName}
+                                        // secondary={receiverData.isGroup ? publicChats.get(receiverData.groupId) : privateChats.get(receiverData.receiverId)}
+                                        primary="Dummy text"
+                                        secondary="Dummy text"
                                     />
                                 </ListItem>
                             </List>
@@ -69,9 +67,10 @@ function MiddlePanel() {
                     <Divider variant="middle" />
                     <Grid container item height="84%" sx={{ marginBottom: "auto" }}>
                         <ChatRoom
-                            privateChats={privateChats.get(receiverData.receiverId ?? null) ?? []}
-                            publicChats={publicChats.get(receiverData.groupId ?? null) ?? []}
-                            isGroup={receiverData.isGroup}
+                            // privateChats={privateChats.get(receiverData.receiverId ?? null) ?? []}
+                            // publicChats={publicChats.get(receiverData.groupId ?? null) ?? []}
+                            // isGroup={receiverData.isGroup}
+                            messages={isGroup ? groupChats : privateChats}
                         />
                     </Grid>
                     <Grid container item height="7.5%">

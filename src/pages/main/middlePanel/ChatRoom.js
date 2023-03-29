@@ -5,9 +5,8 @@ import MessageList from "./MessageList";
 import { MiddlePanelContext } from "./MiddlePanel";
 
 function ChatRoom(props) {
-    const { privateChats, publicChats, isGroup } = props
+    const { messages } = props
     const scrollBars = useRef();
-    const { messages } = useContext(MiddlePanelContext);
 
     useEffect(() => {
         scrollBars.current.scrollToBottom()
@@ -16,7 +15,7 @@ function ChatRoom(props) {
     return (
         <Scrollbars autoHide style={{ height: "100%" }} ref={scrollBars}>
             <Container id="chatroom" sx={{ paddingY: "0.5rem" }}>
-                <MessageList chats={isGroup ? publicChats : privateChats} />
+                <MessageList messages={messages} />
             </Container>
         </Scrollbars>
     )

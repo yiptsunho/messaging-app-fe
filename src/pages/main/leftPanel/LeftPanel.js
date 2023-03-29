@@ -9,7 +9,6 @@ import { MainContext } from "../Main";
 
 function LeftPanel() {
     const [contactHistory, setContactHistory] = useState({})
-    const { receiverData, setReceiverData } = useContext(MainContext)
 
     useEffect(() => {
         // call api to fetch contact history

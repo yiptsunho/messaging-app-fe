@@ -3,8 +3,8 @@ import Message from "./Message";
 import { Grid, Container } from "@mui/material";
 import { MiddlePanelContext } from './MiddlePanel';
 
-function MessageList() {
-    const { messages } = useContext(MiddlePanelContext)
+function MessageList(props) {
+    const { messages } = props;
 
     return (
         <React.Fragment>
