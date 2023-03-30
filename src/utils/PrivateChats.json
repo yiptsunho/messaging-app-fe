@@ -1,0 +1,14 @@
+[
+    {
+        "roomId": 1,
+        "receiverName": "Jacky",
+        "avatar": "",
+        "messageList": []
+    },
+    {
+        "roomId": 2,
+        "receiverName": "Henry",
+        "avatar": "",
+        "messageList": []
+    }
+]

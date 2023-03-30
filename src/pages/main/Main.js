@@ -9,6 +9,7 @@ import { MAIN_BORDER_RADIUS } from '../../utils/Constants'
 import * as _ from 'lodash';
 import Fetching from "../Fetching";
 import { io } from "socket.io-client";
+import PRIVATE_CHATS from '../../utils/PrivateChats.json'
 
 const SOCKET_URL = 'http://localhost:8081';
 const socket = io.connect(SOCKET_URL)
@@ -22,44 +23,79 @@ function Main() {
         setRightPanelCollapsed(!rightPanelCollapsed)
     }
     const [groupChats, setGroupChats] = useState([])
-    const [privateChats, setPrivateChats] = useState([])
-    const roomRef = useRef(null)
-    let dialogParams;
+    // const [privateChats, setPrivateChats] = useState([])
+    const [privateChats, setPrivateChats] = useState(PRIVATE_CHATS)
+    const [currentRoom, setCurrentRoom] = useState(null)
     const { setOpenDialog } = useContext(DialogContext)
     const isGroup = false
 
     useEffect(() => {
+        joinRoom(window.sessionStorage.getItem('userId'))
+        // if (privateChats.length === 0) {
+        //     const params = {
+        //         userId: window.sessionStorage.getItem('userId')
+        //     }
+        //     getMessageHistory(params)
+        // }
+    }, [])
+
+    useEffect(() => {
         socket.on("receive_message", (data) => {
+            // data = {
+            //     message: {
+            //         content: "This is the 3rd message",
+            //         dateTime: "2023-03-28 12:02:00",
+            //         type: "Text",
+            //         senderId: currentRoom
+            //     },
+            //     room: currentRoom
+            // }
             // if (data?.isGroup) {
             //     const newGroupChats = _.cloneDeep(groupChats)
             //     newGroupChats.push(data.content)
             //     setGroupChats(newGroupChats)
             // } else {
             const newPrivateChats = _.cloneDeep(privateChats)
-            newPrivateChats.push(data.content)
+            if (newPrivateChats.find(chat => chat.roomId === data.room)) {
+                newPrivateChats.find(chat => chat.roomId === data.room).messageList.push(data.message)
+            } else {
+                // newPrivateChats.find(chat => chat.roomId === data.room).message.push(data.message)
+            }
             setPrivateChats(newPrivateChats)
             // }
         })
     }, [socket])
 
     const sendMessage = (msg) => {
-        console.log(msg)
-        socket.emit("send_message", {
-            message: msg,
-            room: roomRef.current
-        })
+        const params = {
+            message: {
+                content: msg.content,
+                dateTime: msg.dateTime,
+                type: msg.type,
+                senderId: window.sessionStorage.getItem('userId')
+            },
+            room: currentRoom
+        }
+        socket.emit("send_message", params)
+        // const newPrivateChats = _.cloneDeep(privateChats)
+        // if (newPrivateChats.find(chat => chat.roomId === params.room)) {
+        //     newPrivateChats.find(chat => chat.roomId === params.room).messageList.push(params.message)
+        // } else {
+        //     // newPrivateChats.find(chat => chat.roomId === data.room).message.push(data.message)
+        // }
+        // setPrivateChats(newPrivateChats)
     }
 
-    const joinRoom = () => {
-        if (roomRef.current !== "") {
-            console.log(roomRef.current)
-            socket.emit("join_room", roomRef.current)
+    const joinRoom = (roomId) => {
+        if (roomId !== null) {
+            console.log(roomId)
+            socket.emit("join_room", roomId)
         }
     }
 
     return (
-        <MainContext.Provider value={{ rightPanelCollapsed, toggleRightPanel, groupChats, privateChats, roomRef, sendMessage, joinRoom }}>
-            {!socket.connected ? <Fetching /> :
+        <MainContext.Provider value={{ rightPanelCollapsed, toggleRightPanel, groupChats, privateChats, currentRoom, setCurrentRoom, sendMessage, joinRoom }}>
+            {!socket?.connected ? <Fetching /> :
                 <Container maxWidth="xl" sx={{ height: "100vh", minHeight: "700px", display: "flex", alignItems: "center" }} >
                     <Grid sx={{ height: "95vh", width: "100%" }}>
                         <Paper elevation={3} sx={{ borderRadius: MAIN_BORDER_RADIUS, height: "100%" }}>

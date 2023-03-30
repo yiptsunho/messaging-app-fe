@@ -1,0 +1,1 @@
+export const GET_MESSAGE_HISTORY = '/api/v1/message/'

@@ -20,7 +20,7 @@ export const MiddlePanelContext = createContext({})
 
 function MiddlePanel() {
     const [messages, setMessages] = useState(dummyData)
-    const { groupChats, privateChats, isGroup } = useContext(MainContext)
+    const { currentRoom, groupChats, privateChats, isGroup } = useContext(MainContext)
 
     return (
         <MiddlePanelContext.Provider value={{ messages }}>
@@ -70,7 +70,7 @@ function MiddlePanel() {
                             // privateChats={privateChats.get(receiverData.receiverId ?? null) ?? []}
                             // publicChats={publicChats.get(receiverData.groupId ?? null) ?? []}
                             // isGroup={receiverData.isGroup}
-                            messages={isGroup ? groupChats : privateChats}
+                            messages={currentRoom ? (isGroup ? groupChats.find(chat => chat.roomId == currentRoom)?.messageList : privateChats.find(chat => chat.roomId == currentRoom)?.messageList) : []}
                         />
                     </Grid>
                     <Grid container item height="7.5%">

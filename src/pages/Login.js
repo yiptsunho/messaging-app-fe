@@ -49,7 +49,7 @@ function Login (props) {
         }
 
         console.log(params)
-        if (params.loginId !== "yiptsunho") {
+        if (params.loginId !== "jacky" && params.loginId !== "henry") {
             setLoginIdValid(false)
         }
         if (params.password !== "123456") {
@@ -58,9 +58,14 @@ function Login (props) {
         // dummy login function
         if (loginIdValid && passwordValid) {
             sessionStorage.setItem('accessToken', 'fake token')
-            sessionStorage.setItem('username', params.loginId)
+            if (params.loginId === "jacky") {
+                sessionStorage.setItem('userId', 1)
+            } else if (params.loginId === "henry") {
+                sessionStorage.setItem('userId', 2)
+            }
+            // sessionStorage.setItem('userId', 1)
             setIsLogin(true)
-            navigate("/main", { state: { userId: params.loginId } })
+            navigate("/main", { state: { userId: 1 } })
 
         }
         // real login function

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Grid, ListItemButton, Typography } from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -12,48 +12,67 @@ import DefaultAvatar from '../../../components/DefaultAvatar';
 import Scrollbars from 'react-custom-scrollbars';
 import { MainContext } from '../Main';
 
-function ContactHistory(props) {
-    const { contactHistory } = props;
-    const { roomRef, joinRoom } = useContext(MainContext);
+function ContactHistory() {
+    const { groupChats, privateChats, currentRoom, setCurrentRoom, joinRoom } = useContext(MainContext);
+    let contactHistory = [];
+
+    useEffect(() => {
+
+    }, [groupChats])
+
+    useEffect(() => {
+
+        // contactHistory = []
+        // for (let contact of privateChats) {
+        //     contactHistory.push({
+        //         id: contact.roomId,
+        //         name: contact.receiverName,
+        //         lastMessage: contact.messageList[0] ? contact.messageList[0] : "",
+        //         lastUpdateTime: contact.messageList[0]?.dateTime ?? "",
+        //         image: contact.avatar
+        //     })
+        // }
+
+    }, [privateChats])
 
     return (
         <List sx={{ height: "100%" }}>
                 <Scrollbars autoHide style={{ height: "100%" }}>
                 {/* {contactHistory.map(contact => { */}
-                    {dummyContactHistory.map(contact => {
+                {privateChats.map(chat => {
                         return (
                             <ListItem>
                                 {/* <ListItemButton onClick={() => fetchMessages(contact.id)} sx={{ borderRadius: "8px" }}> */}
                                 <ListItemButton sx={{ borderRadius: "8px" }} onClick={() => {
-                                    roomRef.current = contact.id
-                                    joinRoom()
+                                    joinRoom(chat.roomId)
+                                    setCurrentRoom(chat.roomId)
                                 }}>
                                     <ListItemAvatar>
-                                        {contact.image ?
+                                        {chat.image ?
                                             <Avatar>
                                                 <FolderIcon />
                                             </Avatar>
                                             :
                                             <DefaultAvatar
-                                                name={contact.name}
+                                                name={chat.receiverName}
                                             />
                                         }
                                     </ListItemAvatar>
                                     <ListItemText
                                         primary={
                                             <Typography sx={{ fontWeight: "bold" }}>
-                                                {contact.name}
+                                                {chat.receiverName}
                                             </Typography>
                                         }
                                         secondary={
                                             <Typography variant="subtitle2">
-                                                {contact.lastMessage}
+                                                {chat.messageList[0] ? chat.messageList[0].content : ""}
                                             </Typography>
                                         }
                                     />
                                     <ListItemSecondaryAction sx={{ top: "25%" }}>
                                         <Typography variant='body2'>
-                                            {contact.lastUpdateTime}
+                                            {chat.messageList[0]?.dateTime ?? ""}
                                         </Typography>
                                     </ListItemSecondaryAction>
                                 </ListItemButton>

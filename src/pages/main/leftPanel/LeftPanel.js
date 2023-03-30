@@ -8,7 +8,6 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { MainContext } from "../Main";
 
 function LeftPanel() {
-    const [contactHistory, setContactHistory] = useState({})
 
     useEffect(() => {
         // call api to fetch contact history
@@ -32,8 +31,8 @@ function LeftPanel() {
                 </Grid>
             </Container>
                 <Divider variant="middle" />
-            <Grid container paddingX="16px" height="7%">
-                <Grid container paddingY="0.5rem">
+            <Grid container paddingX="16px" height="10%">
+                <Grid container paddingY="0.5rem" height="100%">
                     <FilledInput
                         fullWidth
                         id="filled-search"
@@ -54,12 +53,13 @@ function LeftPanel() {
                         }}
                         disableUnderline
                         sx={{
-                            borderRadius: "12px"
+                            borderRadius: "12px",
+                            height: "100%"
                         }}
                     />
                 </Grid>
             </Grid>
-            <Container disableGutters sx={{ paddingLeft: "16px", paddingRight: "8px", height: "7.5%", display: "flex", alignItems: "center" }}>
+            <Container disableGutters sx={{ paddingLeft: "16px", paddingRight: "8px", height: "7.5%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <Grid md={4}>
                     <Typography sx={{ fontWeight: "bold" }}>
                         Last Chats
@@ -74,12 +74,9 @@ function LeftPanel() {
                     </IconButton>
                 </Grid>
             </Container>
-            <Grid height="77%">
+            <Grid height="75%">
                 <Divider />
-                <ContactHistory
-                    contactHistory={contactHistory}
-
-                />
+                <ContactHistory />
             </Grid>
         </React.Fragment>
     )
