@@ -59,13 +59,15 @@ function Login (props) {
         if (loginIdValid && passwordValid) {
             sessionStorage.setItem('accessToken', 'fake token')
             if (params.loginId === "jacky") {
-                sessionStorage.setItem('userId', 1)
+                sessionStorage.setItem('userId', "0001")
+                sessionStorage.setItem('loginId', params.loginId)
             } else if (params.loginId === "henry") {
-                sessionStorage.setItem('userId', 2)
+                sessionStorage.setItem('userId', "0002")
+                sessionStorage.setItem('loginId', params.loginId)
             }
             // sessionStorage.setItem('userId', 1)
             setIsLogin(true)
-            navigate("/main", { state: { userId: 1 } })
+            navigate("/main")
 
         }
         // real login function

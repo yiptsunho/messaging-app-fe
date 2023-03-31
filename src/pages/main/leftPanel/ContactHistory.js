@@ -39,13 +39,18 @@ function ContactHistory() {
         <List sx={{ height: "100%" }}>
                 <Scrollbars autoHide style={{ height: "100%" }}>
                 {/* {contactHistory.map(contact => { */}
-                {privateChats.map(chat => {
+                {privateChats.filter(chat => chat.receiverId !== window.sessionStorage.getItem('userId')).map(chat => {
                         return (
                             <ListItem>
                                 {/* <ListItemButton onClick={() => fetchMessages(contact.id)} sx={{ borderRadius: "8px" }}> */}
                                 <ListItemButton sx={{ borderRadius: "8px" }} onClick={() => {
-                                    joinRoom(chat.roomId)
-                                    setCurrentRoom(chat.roomId)
+                                    let userArr = [chat.receiverId, window.sessionStorage.getItem('userId')]
+                                    userArr.sort()
+                                    joinRoom({
+                                        roomId: userArr[0] + userArr[1],
+                                        receiverId: chat.receiverId
+                                    })
+                                    setCurrentRoom(userArr[0] + userArr[1])
                                 }}>
                                     <ListItemAvatar>
                                         {chat.image ?

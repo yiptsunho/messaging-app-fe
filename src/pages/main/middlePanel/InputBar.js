@@ -20,13 +20,23 @@ function InputBar() {
                     type="submit"
                     onSubmit={(event) => {
                         event.preventDefault()
+                        // if (messageContent.current.value) {
+                        //     const newMessage = {
+                        //         id: 4,
+                        //         type: "text",
+                        //         content: messageContent.current.value,
+                        //         time: "",
+                        //         from: currentUser
+                        //     }
+                        //     sendMessage(newMessage)
+                        //     messageContent.current.value = null
+                        // }
                         if (messageContent.current.value) {
                             const newMessage = {
-                                id: 4,
+                                messageId: 4,
                                 type: "text",
                                 content: messageContent.current.value,
-                                time: "",
-                                from: currentUser
+                                dateTime: "2023-3-30 12:01:00"
                             }
                             sendMessage(newMessage)
                             messageContent.current.value = null

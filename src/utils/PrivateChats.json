@@ -1,12 +1,14 @@
 [
     {
-        "roomId": 1,
+        "roomId": "00010002",
+        "receiverId": "0001",
         "receiverName": "Jacky",
         "avatar": "",
         "messageList": []
     },
     {
-        "roomId": 2,
+        "roomId": "00010002",
+        "receiverId": "0002",
         "receiverName": "Henry",
         "avatar": "",
         "messageList": []
