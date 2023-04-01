@@ -3,7 +3,7 @@ import { Chip, Grid, Paper } from "@mui/material";
 
 function Message (props) {
     const { message } = props;
-    const currentUserId = 1
+    const currentUserId = window.sessionStorage.getItem('userId')
 
     return (
         <Grid item md={12} sx={{ display: "flex", justifyContent: message.senderId == currentUserId ? "flex-end" : "flex-start" }}>

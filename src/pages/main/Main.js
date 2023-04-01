@@ -22,8 +22,8 @@ function Main() {
         setRightPanelCollapsed(!rightPanelCollapsed)
     }
     const [groupChats, setGroupChats] = useState([])
-    // const [privateChats, setPrivateChats] = useState([])
-    const [privateChats, setPrivateChats] = useState(PRIVATE_CHATS)
+    const [privateChats, setPrivateChats] = useState([])
+    // const [privateChats, setPrivateChats] = useState(PRIVATE_CHATS)
     const [currentRoom, setCurrentRoom] = useState(null)
     const { setOpenDialog } = useContext(DialogContext)
 
@@ -32,20 +32,40 @@ function Main() {
         socket.connect()
     }, [])
 
-    useEffect(() => {
-        socket.on("receive_message", (data) => {
-            const newPrivateChats = _.cloneDeep(privateChats)
-            if (newPrivateChats.find(chat => chat.roomId === data.room)) {
-                newPrivateChats.find(chat => chat.roomId === data.room).messageList.push(data.message)
-            } else {
-                // newPrivateChats.find(chat => chat.roomId === data.room).message.push(data.message)
-            }
-            setPrivateChats(newPrivateChats)
-            // }
-        })
-    }, [socket])
+    socket.on("receive_message", (data) => {
+        const newPrivateChats = _.cloneDeep(privateChats)
+        if (newPrivateChats.find(chat => chat.roomId === data.room && chat.receiverId != window.sessionStorage.getItem('userId'))) {
+            newPrivateChats.find(chat => chat.roomId === data.room && chat.receiverId != window.sessionStorage.getItem('userId')).messageList.push(data.message)
+        } else {
+            // newPrivateChats.find(chat => chat.roomId === data.room).message.push(data.message)
+        }
+        setPrivateChats(newPrivateChats)
+        // }
+    })
 
-    const sendMessage = (msg) => {
+    useEffect(() => {
+        const newPrivateChats = _.cloneDeep(privateChats)
+        if (window.sessionStorage.getItem('userId') == 2) {
+            newPrivateChats.push({
+                "roomId": "00010002",
+                "receiverId": "0001",
+                "receiverName": "Jacky",
+                "avatar": "",
+                "messageList": []
+            })
+        } else {
+            newPrivateChats.push({
+                "roomId": "00010002",
+                "receiverId": "0002",
+                "receiverName": "Henry",
+                "avatar": "",
+                "messageList": []
+            })
+        }
+        setPrivateChats(newPrivateChats)
+    }, [])
+
+    const sendMessage = async (msg) => {
         const params = {
             message: {
                 content: msg.content,
@@ -55,19 +75,20 @@ function Main() {
             },
             room: currentRoom
         }
-        socket.emit("send_message", params)
+        await socket.emit("send_message", params)
         const newPrivateChats = _.cloneDeep(privateChats)
-        if (newPrivateChats.find(chat => chat.roomId === msg.room)) {
-            newPrivateChats.find(chat => chat.roomId === msg.room).messageList.push(msg.message)
+        if (newPrivateChats.find(chat => chat.roomId === params.room)) {
+            newPrivateChats.find(chat => chat.roomId === params.room).messageList.push(params.message)
         } else {
             // newPrivateChats.find(chat => chat.roomId === data.room).message.push(data.message)
         }
+        setPrivateChats(newPrivateChats)
     }
 
-    const joinRoom = (props) => {
+    const joinRoom = async (props) => {
         const { roomId, receiverId } = props;
         if (roomId !== null && receiverId !== null) {
-            socket.emit("join_room", props)
+            await socket.emit("join_room", props)
         }
         window.sessionStorage.setItem('receiverId', receiverId)
     }

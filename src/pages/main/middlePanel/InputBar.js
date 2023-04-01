@@ -5,6 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import FileIcon from '@mui/icons-material/InsertDriveFile';
 import { MainContext } from '../Main';
+import moment from 'moment';
 
 function InputBar() {
     const [hasFile, setHasFile] = useState(false)
@@ -36,7 +37,7 @@ function InputBar() {
                                 messageId: 4,
                                 type: "text",
                                 content: messageContent.current.value,
-                                dateTime: "2023-3-30 12:01:00"
+                                dateTime: moment()
                             }
                             sendMessage(newMessage)
                             messageContent.current.value = null
@@ -69,7 +70,7 @@ function InputBar() {
                                         messageId: 4,
                                         type: "text",
                                         content: messageContent.current.value,
-                                        dateTime: "2023-3-30 12:01:00"
+                                        dateTime: moment()
                                     }
                                     sendMessage(newMessage)
                                     messageContent.current.value = null

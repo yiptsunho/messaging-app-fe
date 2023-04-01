@@ -11,35 +11,17 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import DefaultAvatar from '../../../components/DefaultAvatar';
 import Scrollbars from 'react-custom-scrollbars';
 import { MainContext } from '../Main';
+import moment from 'moment';
 
 function ContactHistory() {
     const { groupChats, privateChats, currentRoom, setCurrentRoom, joinRoom } = useContext(MainContext);
-    let contactHistory = [];
-
-    useEffect(() => {
-
-    }, [groupChats])
-
-    useEffect(() => {
-
-        // contactHistory = []
-        // for (let contact of privateChats) {
-        //     contactHistory.push({
-        //         id: contact.roomId,
-        //         name: contact.receiverName,
-        //         lastMessage: contact.messageList[0] ? contact.messageList[0] : "",
-        //         lastUpdateTime: contact.messageList[0]?.dateTime ?? "",
-        //         image: contact.avatar
-        //     })
-        // }
-
-    }, [privateChats])
 
     return (
         <List sx={{ height: "100%" }}>
                 <Scrollbars autoHide style={{ height: "100%" }}>
                 {/* {contactHistory.map(contact => { */}
                 {privateChats.filter(chat => chat.receiverId !== window.sessionStorage.getItem('userId')).map(chat => {
+                    console.log(chat.messageList[chat.messageList.length - 1]?.dateTime)
                         return (
                             <ListItem>
                                 {/* <ListItemButton onClick={() => fetchMessages(contact.id)} sx={{ borderRadius: "8px" }}> */}
@@ -71,13 +53,13 @@ function ContactHistory() {
                                         }
                                         secondary={
                                             <Typography variant="subtitle2">
-                                                {chat.messageList[0] ? chat.messageList[0].content : ""}
+                                                {chat.messageList[chat.messageList.length - 1] ? chat.messageList[chat.messageList.length - 1].content : ""}
                                             </Typography>
                                         }
                                     />
                                     <ListItemSecondaryAction sx={{ top: "25%" }}>
                                         <Typography variant='body2'>
-                                            {chat.messageList[0]?.dateTime ?? ""}
+                                            {moment(chat.messageList[chat.messageList.length - 1]?.dateTime['_d']).format('YYYY-MM-DD HH:mm:ss') ?? ""}
                                         </Typography>
                                     </ListItemSecondaryAction>
                                 </ListItemButton>
