@@ -16,9 +16,10 @@ function InputBar() {
 
     return (
         <Grid container sx={{ paddingLeft: "1rem", paddingRight: "1rem", paddingBottom: "1rem" }}>
-            <Paper elevation={3} sx={{ width: "100%", padding: "0.5rem", borderRadius: "1rem" }}>
+            <Paper elevation={3} sx={{ width: "100%", padding: "0.5rem", borderRadius: "1rem", alignItems: "center", display: "flex" }}>
                 <form
                     type="submit"
+                    style={{ width: "100%" }}
                     onSubmit={(event) => {
                         event.preventDefault()
                         // if (messageContent.current.value) {

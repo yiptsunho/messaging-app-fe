@@ -31,7 +31,7 @@ function LeftPanel() {
                 </Grid>
             </Container>
                 <Divider variant="middle" />
-            <Grid container paddingX="16px" height="10%">
+            <Grid container paddingX="16px" height="10%" maxHeight="75px">
                 <Grid container paddingY="0.5rem" height="100%">
                     <FilledInput
                         fullWidth
@@ -59,7 +59,7 @@ function LeftPanel() {
                     />
                 </Grid>
             </Grid>
-            <Container disableGutters sx={{ paddingLeft: "16px", paddingRight: "8px", height: "7.5%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <Container disableGutters sx={{ paddingLeft: "16px", paddingRight: "8px", height: "7.5%", maxHeight: "75px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <Grid md={4}>
                     <Typography sx={{ fontWeight: "bold" }}>
                         Last Chats

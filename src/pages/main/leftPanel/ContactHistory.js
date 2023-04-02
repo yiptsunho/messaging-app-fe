@@ -21,11 +21,11 @@ function ContactHistory() {
                 <Scrollbars autoHide style={{ height: "100%" }}>
                 {/* {contactHistory.map(contact => { */}
                 {privateChats.filter(chat => chat.receiverId !== window.sessionStorage.getItem('userId')).map(chat => {
-                    console.log(chat.messageList[chat.messageList.length - 1]?.dateTime)
+                    const lastMessage = chat.messageList[chat.messageList.length - 1]
                         return (
-                            <ListItem>
+                            <ListItem sx={{ height: "10%" }}>
                                 {/* <ListItemButton onClick={() => fetchMessages(contact.id)} sx={{ borderRadius: "8px" }}> */}
-                                <ListItemButton sx={{ borderRadius: "8px" }} onClick={() => {
+                                <ListItemButton sx={{ borderRadius: "8px", height: "100%", maxHeight: "100px", minHeight: "75px" }} onClick={() => {
                                     let userArr = [chat.receiverId, window.sessionStorage.getItem('userId')]
                                     userArr.sort()
                                     joinRoom({
@@ -53,13 +53,13 @@ function ContactHistory() {
                                         }
                                         secondary={
                                             <Typography variant="subtitle2">
-                                                {chat.messageList[chat.messageList.length - 1] ? chat.messageList[chat.messageList.length - 1].content : ""}
+                                                {lastMessage ? lastMessage.content : ""}
                                             </Typography>
                                         }
                                     />
                                     <ListItemSecondaryAction sx={{ top: "25%" }}>
                                         <Typography variant='body2'>
-                                            {moment(chat.messageList[chat.messageList.length - 1]?.dateTime['_d']).format('YYYY-MM-DD HH:mm:ss') ?? ""}
+                                            {moment(lastMessage?.dateTime['_d']).format('YYYY-MM-DD HH:mm:ss') ?? ""}
                                         </Typography>
                                     </ListItemSecondaryAction>
                                 </ListItemButton>

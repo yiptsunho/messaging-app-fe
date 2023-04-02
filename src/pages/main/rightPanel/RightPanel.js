@@ -97,13 +97,13 @@ function RightPanel() {
                         </Avatar>
                     </Grid>
                     <Grid container md={12} rowSpacing={2} justifyContent="center">
-                            <Grid item>
+                        <Grid item md={12} justifyContent="center" display="flex">
                             Files
                             </Grid>
                         {
                             fileList.map(file => {
                                 return (
-                                    <Grid item>
+                                    <Grid item md={12} justifyContent="center" display="flex">
                                         <IconButton>
                                             <Avatar variant="rounded" sx={{ borderRadius: "10px", bgcolor: file.bgColor }}>
                                                 {file.icon}
