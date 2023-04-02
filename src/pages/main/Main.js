@@ -101,13 +101,13 @@ function Main() {
                         <Paper elevation={3} sx={{ borderRadius: MAIN_BORDER_RADIUS, height: "100%" }}>
                             <Grid container sx={{ height: "100%", paddingY: "1rem" }}>
                                 <Grid container sx={{ height: "100%" }}>
-                                    <Grid md={3} sx={{ borderTopLeftRadius: MAIN_BORDER_RADIUS, borderBottomLeftRadius: MAIN_BORDER_RADIUS }}>
+                                <Grid sm={3} sx={{ borderTopLeftRadius: MAIN_BORDER_RADIUS, borderBottomLeftRadius: MAIN_BORDER_RADIUS }}>
                                         <LeftPanel />
                                     </Grid>
-                                    <Grid md={rightPanelCollapsed ? 8 : 6} sx={{ borderTopRightRadius: MAIN_BORDER_RADIUS, borderBottomLeftRadius: MAIN_BORDER_RADIUS }}>
+                                <Grid sm={rightPanelCollapsed ? 8 : 6} sx={{ borderTopRightRadius: MAIN_BORDER_RADIUS, borderBottomLeftRadius: MAIN_BORDER_RADIUS }}>
                                         <MiddlePanel />
                                     </Grid>
-                                    <Grid md={rightPanelCollapsed ? 1 : 3}>
+                                <Grid sm={rightPanelCollapsed ? 1 : 3}>
                                         <RightPanel />
                                     </Grid>
                                 </Grid>
