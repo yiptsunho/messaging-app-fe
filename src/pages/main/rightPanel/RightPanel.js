@@ -137,9 +137,9 @@ function RightPanel() {
                         <Container disableGutters sx={{ paddingX: "16px", justifyContent: "center" }}>
                             <Grid container md={12} justifyContent="space-between">
                                 <Grid item md={6} display="flex" justifyContent="start">
-                                    <Button variant="contained" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%" }}>
+                                    <Button variant="contained" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%", aspectRatio: "1.5" }}>
                                         <Grid container>
-                                            <Grid item md={6} alignItems="center" display="flex">
+                                            <Grid item md={6} alignItems="center" justifyContent="center" display="flex">
                                                 <FolderIcon fontSize="large" />
                                             </Grid>
                                             <Grid item md={6}>
@@ -151,9 +151,9 @@ function RightPanel() {
                                     </Button>
                                 </Grid>
                                 <Grid item md={6} display="flex" justifyContent="end">
-                                    <Button variant="contained" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%" }}>
+                                    <Button variant="contained" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%", aspectRatio: "1.5" }}>
                                         <Grid container>
-                                            <Grid item md={6} alignItems="center" display="flex">
+                                            <Grid item md={6} alignItems="center" justifyContent="center" display="flex">
                                                 <LinkIcon fontSize="large" />
                                             </Grid>
                                             <Grid item md={6}>
