@@ -55,7 +55,7 @@ function RightPanel() {
     return (
         <React.Fragment>
             <Container sx={{ height: "7.5%", alignItems: "center", display: "flex" }}>
-                <Grid container justifyContent={rightPanelCollapsed ? "center" : "space-between"} alignItems="center" columnSpacing={1}>
+                <Grid container justifyContent={rightPanelCollapsed ? "center" : "space-between"} alignItems="center">
                     {rightPanelCollapsed ? 
                         <Box
                             display="flex"
@@ -137,29 +137,35 @@ function RightPanel() {
                         <Container disableGutters sx={{ paddingX: "16px", justifyContent: "center" }}>
                             <Grid container md={12} justifyContent="space-between">
                                 <Grid item md={6} display="flex" justifyContent="start">
-                                    <Button variant="contained" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%", aspectRatio: "1.5" }}>
+                                    <Button variant="contained" color="third" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%", aspectRatio: "1.5", boxShadow: "none" }}>
                                         <Grid container>
                                             <Grid item md={6} alignItems="center" justifyContent="center" display="flex">
-                                                <FolderIcon fontSize="large" />
+                                                <FolderIcon fontSize="large" color="primary" />
                                             </Grid>
                                             <Grid item md={6}>
+                                                <Typography variant="body2" color="primary">
                                                 Files
-                                                <br />
+                                                </Typography>
+                                                <Typography variant="h5" color="primary">
                                                 232
+                                                </Typography>
                                             </Grid>
                                         </Grid>
                                     </Button>
                                 </Grid>
                                 <Grid item md={6} display="flex" justifyContent="end">
-                                    <Button variant="contained" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%", aspectRatio: "1.5" }}>
+                                    <Button variant="contained" color="third" sx={{ borderRadius: "0.5rem", padding: "1rem", width: "95%", aspectRatio: "1.5", boxShadow: "none" }}>
                                         <Grid container>
                                             <Grid item md={6} alignItems="center" justifyContent="center" display="flex">
-                                                <LinkIcon fontSize="large" />
+                                                <LinkIcon fontSize="large" color="primary" />
                                             </Grid>
                                             <Grid item md={6}>
-                                                Links
-                                                <br />
+                                                <Typography variant="body2" color="primary">
+                                                    Links
+                                                </Typography>
+                                                <Typography variant="h5" color="primary">
                                                 45
+                                                </Typography>
                                             </Grid>
                                         </Grid>
                                     </Button>

@@ -19,23 +19,23 @@ const theme = createTheme({
             main: "#00A389",
             // light is for main button background
             light: "#E0F4F1",
-            dark: ""
+            // dark: ""
         },
-        // also green
+        // darker green
         secondary: {
             // 
             main: "#007A67",
             // 
             light: "#D1E7E8",
-            dark: ""
+            // dark: ""
         },
-        // another green
+        // lighter green
         third: {
             // 
-            main: "#0BA78E",
-            // 
-            light: "#0BA78E",
-            dark: ""
+            main: "#E0F4F1",
+            //
+            // light: "#0BA78E",
+            // dark: ""
         },
         // grey
         background: {
@@ -43,8 +43,10 @@ const theme = createTheme({
             main: "#DCDFE6",
             // light is for chat room background
             light: "#EDF0F5",
-            dark: ""
+            // dark: ""
         },
+        contrastThreshold: 3,
+        tonalOffset: 0.2,
     },
     breakpoints: {
         values: {

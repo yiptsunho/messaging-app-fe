@@ -1,13 +1,17 @@
 import React, { useContext, useRef, useState } from 'react';
 import { IconButton, InputBase, Grid, Paper, Button, useMediaQuery } from "@mui/material";
-import StickerIcon from '@mui/icons-material/AutoAwesomeMotion';
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import FileIcon from '@mui/icons-material/InsertDriveFile';
 import { MainContext } from '../Main';
 import moment from 'moment';
+import Icon from '@mdi/react';
+import { mdiStickerCircleOutline } from '@mdi/js';
+import EmojiIcon from '@mui/icons-material/EmojiEmotions';
+import StickerEmojiTab from './StickerEmojiTab';
 
-function InputBar() {
+function InputBar(props) {
+    const { showTab, toggleTab } = props;
     const [hasFile, setHasFile] = useState(false)
     const { sendMessage } = useContext(MainContext)
     const currentUser = window.sessionStorage.getItem('username')
@@ -16,7 +20,7 @@ function InputBar() {
 
     return (
         <Grid container sx={{ paddingLeft: "1rem", paddingRight: "1rem", paddingBottom: "1rem" }}>
-            <Paper elevation={3} sx={{ width: "100%", padding: "0.5rem", borderRadius: "1rem", alignItems: "center", display: "flex" }}>
+            <Paper elevation={3} sx={{ width: "100%", padding: "0.5rem", borderRadius: "1rem", alignItems: "center", display: "flex", flexDirection: "column" }}>
                 <form
                     type="submit"
                     style={{ width: "100%" }}
@@ -48,6 +52,9 @@ function InputBar() {
                         <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"}>
                             <AddIcon fontSize={lg ? "small" : "medium"} />
                         </IconButton>
+                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"} onClick={toggleTab}>
+                            <EmojiIcon fontSize={lg ? "small" : "medium"} />
+                        </IconButton>
                         {hasFile &&
                             <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"}>
                                 <FileIcon fontSize={lg ? "small" : "medium"} />
@@ -58,8 +65,9 @@ function InputBar() {
                             placeholder="Type here.."
                             inputRef={messageContent}
                         />
-                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"}>
-                            <StickerIcon fontSize={lg ? "small" : "medium"} />
+                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"} onClick={toggleTab}>
+                            {/* <StickerIcon fontSize={lg ? "small" : "medium"} /> */}
+                            <Icon path={mdiStickerCircleOutline} size={1} />
                         </IconButton>
                         {/* <Divider sx={{ height: "auto", m: 0.5 }} orientation="vertical" /> */}
                         <Button
@@ -85,6 +93,7 @@ function InputBar() {
                         </Button>
                     </Grid>
                 </form>
+                {showTab && <StickerEmojiTab />}
             </Paper>
         </Grid>
     )

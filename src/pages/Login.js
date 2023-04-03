@@ -49,7 +49,7 @@ function Login (props) {
         }
 
         console.log(params)
-        if (params.loginId !== "jacky" && params.loginId !== "henry") {
+        if (params.loginId.toLowerCase() !== "jacky" && params.loginId.toLowerCase() !== "henry" && params.loginId.toLowerCase() !== "timothy" && params.loginId.toLowerCase() !== "ashley" && params.loginId.toLowerCase() !== "gianna") {
             setLoginIdValid(false)
         }
         if (params.password !== "123456") {
@@ -58,11 +58,20 @@ function Login (props) {
         // dummy login function
         if (loginIdValid && passwordValid) {
             sessionStorage.setItem('accessToken', 'fake token')
-            if (params.loginId === "jacky") {
+            if (params.loginId.toLowerCase() === "jacky") {
                 sessionStorage.setItem('userId', "0001")
                 sessionStorage.setItem('loginId', params.loginId)
-            } else if (params.loginId === "henry") {
+            } else if (params.loginId.toLowerCase() === "henry") {
                 sessionStorage.setItem('userId', "0002")
+                sessionStorage.setItem('loginId', params.loginId)
+            } else if (params.loginId.toLowerCase() === "timothy") {
+                sessionStorage.setItem('userId', "0003")
+                sessionStorage.setItem('loginId', params.loginId)
+            } else if (params.loginId.toLowerCase() === "ashley") {
+                sessionStorage.setItem('userId', "0004")
+                sessionStorage.setItem('loginId', params.loginId)
+            } else if (params.loginId.toLowerCase() === "gianna") {
+                sessionStorage.setItem('userId', "0005")
                 sessionStorage.setItem('loginId', params.loginId)
             }
             // sessionStorage.setItem('userId', 1)

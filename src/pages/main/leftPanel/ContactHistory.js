@@ -19,20 +19,29 @@ function ContactHistory() {
     return (
         <List sx={{ height: "100%" }}>
                 <Scrollbars autoHide style={{ height: "100%" }}>
-                {/* {contactHistory.map(contact => { */}
-                {privateChats.filter(chat => chat.receiverId !== window.sessionStorage.getItem('userId')).map(chat => {
+                {privateChats/*.filter(chat => chat.receiverId !== window.sessionStorage.getItem('userId'))*/.map(chat => {
                     const lastMessage = chat.messageList[chat.messageList.length - 1]
                         return (
-                            <ListItem sx={{ height: "10%" }}>
-                                {/* <ListItemButton onClick={() => fetchMessages(contact.id)} sx={{ borderRadius: "8px" }}> */}
+                            <ListItem sx={{ height: "fit-content" }}>
                                 <ListItemButton sx={{ borderRadius: "8px", height: "100%", maxHeight: "100px", minHeight: "75px" }} onClick={() => {
-                                    let userArr = [chat.receiverId, window.sessionStorage.getItem('userId')]
-                                    userArr.sort()
-                                    joinRoom({
-                                        roomId: userArr[0] + userArr[1],
-                                        receiverId: chat.receiverId
-                                    })
-                                    setCurrentRoom(userArr[0] + userArr[1])
+                                    if (chat.isGroup) {
+                                        joinRoom({
+                                            roomId: chat.roomId,
+                                            receiverId: chat.receiverId,
+                                            isGroup: chat.isGroup
+                                        })
+                                        setCurrentRoom(chat.roomId)
+                                    } else {
+                                        // produce a roomId based on the userId of the 2 users, sorted ascending
+                                        let userArr = [chat.receiverId, window.sessionStorage.getItem('userId')]
+                                        userArr.sort()
+                                        joinRoom({
+                                            roomId: userArr[0] + userArr[1],
+                                            receiverId: chat.receiverId,
+                                            isGroup: chat.isGroup
+                                        })
+                                        setCurrentRoom(userArr[0] + userArr[1])
+                                    }
                                 }}>
                                     <ListItemAvatar>
                                         {chat.image ?

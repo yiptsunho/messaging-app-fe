@@ -2,7 +2,7 @@ import { Avatar } from '@mui/material';
 import React from 'react';
 
 function DefaultAvatar(props) {
-    const { name } = props;
+    const { name, ...rest } = props;
     const getAbbreviation = (name) => {
         const part = name.toUpperCase().split(' ')
         if (part.length === 0) {
@@ -20,7 +20,7 @@ function DefaultAvatar(props) {
     }
 
     return (
-        <Avatar>
+        <Avatar {...rest}>
             {getAbbreviation(name)}
         </Avatar>
     )

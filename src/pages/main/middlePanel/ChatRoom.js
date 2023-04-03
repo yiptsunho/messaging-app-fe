@@ -5,7 +5,7 @@ import MessageList from "./MessageList";
 import { MiddlePanelContext } from "./MiddlePanel";
 
 function ChatRoom(props) {
-    const { messages } = props
+    const { messages, isGroup } = props
     const scrollBars = useRef();
 
     useEffect(() => {
@@ -15,7 +15,7 @@ function ChatRoom(props) {
     return (
         <Scrollbars autoHide style={{ height: "100%" }} ref={scrollBars}>
             <Container id="chatroom" sx={{ paddingY: "0.5rem" }}>
-                <MessageList messages={messages} />
+                <MessageList messages={messages} isGroup={isGroup} />
             </Container>
         </Scrollbars>
     )
