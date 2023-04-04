@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { IconButton, InputBase, Grid, Paper, Button, useMediaQuery } from "@mui/material";
+import { IconButton, InputBase, Grid, Paper, Button, useMediaQuery, Collapse } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import FileIcon from '@mui/icons-material/InsertDriveFile';
@@ -9,13 +9,14 @@ import Icon from '@mdi/react';
 import { mdiStickerCircleOutline } from '@mdi/js';
 import EmojiIcon from '@mui/icons-material/EmojiEmotions';
 import StickerEmojiTab from './StickerEmojiTab';
+import EmojiPicker from 'emoji-picker-react';
 
 function InputBar(props) {
     const { showTab, toggleTab } = props;
     const [hasFile, setHasFile] = useState(false)
     const { sendMessage } = useContext(MainContext)
     const currentUser = window.sessionStorage.getItem('username')
-    const messageContent = useRef(null)
+    const [messageContent, setMessageContent] = useState("")
     const lg = useMediaQuery('(max-width:1200px)')
 
     return (
@@ -26,26 +27,15 @@ function InputBar(props) {
                     style={{ width: "100%" }}
                     onSubmit={(event) => {
                         event.preventDefault()
-                        // if (messageContent.current.value) {
-                        //     const newMessage = {
-                        //         id: 4,
-                        //         type: "text",
-                        //         content: messageContent.current.value,
-                        //         time: "",
-                        //         from: currentUser
-                        //     }
-                        //     sendMessage(newMessage)
-                        //     messageContent.current.value = null
-                        // }
-                        if (messageContent.current.value) {
+                        if (messageContent) {
                             const newMessage = {
                                 messageId: 4,
                                 type: "text",
-                                content: messageContent.current.value,
+                                content: messageContent,
                                 dateTime: moment()
                             }
                             sendMessage(newMessage)
-                            messageContent.current.value = null
+                            setMessageContent("")
                         }
                     }}>
                     <Grid container>
@@ -63,7 +53,10 @@ function InputBar(props) {
                         <InputBase
                             sx={{ ml: 1, flex: 1 }}
                             placeholder="Type here.."
-                            inputRef={messageContent}
+                            value={messageContent}
+                            onChange={(e) => {
+                                setMessageContent(e.target.value)
+                            }}
                         />
                         <IconButton type="button" sx={{ p: '10px' }} aria-label="search" size={lg ? "small" : "medium"} onClick={toggleTab}>
                             {/* <StickerIcon fontSize={lg ? "small" : "medium"} /> */}
@@ -74,15 +67,15 @@ function InputBar(props) {
                             variant="contained"
                             type="submit"
                             onClick={() => {
-                                if (messageContent.current.value) {
+                                if (messageContent) {
                                     const newMessage = {
                                         messageId: 4,
                                         type: "text",
-                                        content: messageContent.current.value,
+                                        content: messageContent,
                                         dateTime: moment()
                                     }
                                     sendMessage(newMessage)
-                                    messageContent.current.value = null
+                                    setMessageContent("")
                                 }
                             }}
                             sx={{ p: '10px', minWidth: "unset", borderRadius: "10px" }}
@@ -93,7 +86,28 @@ function InputBar(props) {
                         </Button>
                     </Grid>
                 </form>
-                {showTab && <StickerEmojiTab />}
+                {showTab &&
+                    <EmojiPicker
+                        width="100%"
+                        height="300px"
+                        previewConfig={{
+                            showPreview: false // defaults to: true
+                        }}
+                        suggestedEmojisMode="recent"
+                        onEmojiClick={(emojiData, event) => {
+                            let newValue = messageContent + emojiData.emoji
+                            setMessageContent(newValue)
+                        }}
+                    />
+                }
+                {/* <EmojiPicker
+                        width="100%"
+                        height="300px"
+                        previewConfig={{
+                            showPreview: false // defaults to: true
+                        }}
+                        suggestedEmojisMode="recent"
+                    /> */}
             </Paper>
         </Grid>
     )
