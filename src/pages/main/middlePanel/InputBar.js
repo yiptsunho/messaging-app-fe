@@ -8,7 +8,6 @@ import moment from 'moment';
 import Icon from '@mdi/react';
 import { mdiStickerCircleOutline } from '@mdi/js';
 import EmojiIcon from '@mui/icons-material/EmojiEmotions';
-import StickerEmojiTab from './StickerEmojiTab';
 import EmojiPicker from 'emoji-picker-react';
 
 function InputBar(props) {
