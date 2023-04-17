@@ -3,4 +3,4 @@ export const USER = {
 }
 
 export const MAIN_BORDER_RADIUS = "20px"
-export const SOCKET_URL = `https://13.231.155.60:8080`;
+export const SOCKET_URL = `http://13.231.155.60:8080`;
