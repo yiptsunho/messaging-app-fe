@@ -67,7 +67,7 @@ function MiddlePanel() {
                             </Container>
                         </Grid>
                         <Divider variant="middle" />
-                        <Grid container item height={showTab ? "54%" : "84%"} sx={{ marginBottom: "auto" }}>
+                        <Grid container item height={showTab ? "44%" : "84%"} sx={{ marginBottom: "auto" }}>
                             <ChatRoom
                                 // privateChats={privateChats.get(receiverData.receiverId ?? null) ?? []}
                                 // publicChats={publicChats.get(receiverData.groupId ?? null) ?? []}
@@ -76,7 +76,7 @@ function MiddlePanel() {
                                 isGroup={currentRoom ? privateChats.find(chat => chat.roomId == currentRoom)?.isGroup : ""}
                             />
                         </Grid>
-                        <Grid container item height={showTab ? "37.5%" : "7.5%"}>
+                        <Grid container item height={showTab ? "47.5%" : "7.5%"}>
                             <InputBar showTab={showTab} toggleTab={toggleTab} />
                         </Grid>
                         {/* <Grid container item height="30%">
