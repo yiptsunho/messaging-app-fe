@@ -8,8 +8,9 @@ import { MAIN_BORDER_RADIUS } from '../../utils/Constants'
 import * as _ from 'lodash';
 import Fetching from "../Fetching";
 import { io } from "socket.io-client";
+import * as CONSTANTS from '../../utils/Constants'
 
-const SOCKET_URL = 'http://192.168.102.184:8081';
+const SOCKET_URL = CONSTANTS.SOCKET_URL
 const socket = io.connect(SOCKET_URL, { autoConnect: false })
 
 export const MainContext = createContext({});
