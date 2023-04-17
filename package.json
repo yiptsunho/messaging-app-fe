@@ -1,6 +1,7 @@
 {
   "name": "messaging-app",
   "version": "0.1.0",
+  "homepage": "https://yiptsunho.github.io/messaging-app-fe",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
