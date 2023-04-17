@@ -8,7 +8,7 @@ import moment from 'moment';
 import Icon from '@mdi/react';
 import { mdiStickerCircleOutline } from '@mdi/js';
 import EmojiIcon from '@mui/icons-material/EmojiEmotions';
-import StickerEmojiTab from './StickerEmojiTab';
+import EmojiDrawer from './EmojiDrawer';
 
 function InputBar(props) {
     const { showTab, toggleTab } = props;
@@ -93,7 +93,7 @@ function InputBar(props) {
                         </Button>
                     </Grid>
                 </form>
-                {showTab && <StickerEmojiTab />}
+                {showTab && <EmojiDrawer />}
             </Paper>
         </Grid>
     )

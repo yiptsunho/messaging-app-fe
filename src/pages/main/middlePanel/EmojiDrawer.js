@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import HistoryIcon from '@mui/icons-material/History';
 import SentimentIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 
-function StickerEmojiTab() {
+function EmojiDrawer() {
     const [currentTab, setCurrentTab] = useState("history")
     const handleChange = (event, newTab) => {
         setCurrentTab(newTab)
@@ -25,4 +25,4 @@ function StickerEmojiTab() {
     )
 };
 
-export default StickerEmojiTab;
+export default EmojiDrawer;
