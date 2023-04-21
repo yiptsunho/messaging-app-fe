@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import MessageList from "./MessageList";
 import { MiddlePanelContext } from "./MiddlePanel";

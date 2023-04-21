@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Grid, Paper, Typography, TextField, MenuItem, Box } from '@mui/material';
-import * as _ from 'lodash';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Button, Grid, Typography, TextField, Box } from '@mui/material';
+import cloneDeep from 'lodash/cloneDeep';
+// import InputAdornment from '@mui/material/InputAdornment';
+// import IconButton from '@mui/material/IconButton';
+// import Visibility from '@mui/icons-material/Visibility';
+// import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 function UserForm(props) {
@@ -18,7 +18,7 @@ function UserForm(props) {
     const navigate = useNavigate()
 
     const handleChange = (fieldName, value) => {
-        let newData = _.cloneDeep(form)
+        let newData = cloneDeep(form)
         newData[fieldName] = value
         setForm(newData);
     }

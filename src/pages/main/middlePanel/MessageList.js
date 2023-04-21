@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Message from "./Message";
-import { Grid, Container } from "@mui/material";
+import { Grid } from "@mui/material";
 import { MiddlePanelContext } from './MiddlePanel';
 
 function MessageList(props) {

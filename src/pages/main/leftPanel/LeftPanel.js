@@ -2,7 +2,7 @@ import ContactHistory from "./ContactHistory";
 import { Container, Divider, FilledInput, Grid, IconButton, Typography } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { MainContext } from "../Main";

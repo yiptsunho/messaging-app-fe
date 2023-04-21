@@ -1,15 +1,16 @@
 import { Container, Grid, Paper } from "@mui/material";
-import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import LeftPanel from "./leftPanel/LeftPanel";
 import MiddlePanel from "./middlePanel/MiddlePanel";
 import RightPanel from "./rightPanel/RightPanel";
 import { useLocation } from "react-router-dom";
 import { DialogContext } from "../../App";
 import { MAIN_BORDER_RADIUS } from '../../utils/Constants'
-import * as _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import Fetching from "../Fetching";
 import { io } from "socket.io-client";
 import PRIVATE_CHATS from '../../utils/PrivateChats.json'
+
 
 const SOCKET_URL = 'http://localhost:8081';
 const socket = io.connect(SOCKET_URL)
@@ -51,11 +52,11 @@ function Main() {
             //     room: currentRoom
             // }
             // if (data?.isGroup) {
-            //     const newGroupChats = _.cloneDeep(groupChats)
+            //     const newGroupChats = cloneDeep(groupChats)
             //     newGroupChats.push(data.content)
             //     setGroupChats(newGroupChats)
             // } else {
-            const newPrivateChats = _.cloneDeep(privateChats)
+            const newPrivateChats = cloneDeep(privateChats)
             if (newPrivateChats.find(chat => chat.roomId === data.room)) {
                 newPrivateChats.find(chat => chat.roomId === data.room).messageList.push(data.message)
             } else {
@@ -77,7 +78,7 @@ function Main() {
             room: currentRoom
         }
         socket.emit("send_message", params)
-        // const newPrivateChats = _.cloneDeep(privateChats)
+        // const newPrivateChats = cloneDeep(privateChats)
         // if (newPrivateChats.find(chat => chat.roomId === params.room)) {
         //     newPrivateChats.find(chat => chat.roomId === params.room).messageList.push(params.message)
         // } else {
