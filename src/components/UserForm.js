@@ -10,7 +10,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 function UserForm(props) {
     const { data, handleSubmit, formTitle } = props;
     const [form, setForm] = useState(data ?? {
-        loginId: '',
+        emailAddress: '',
         password: '',
         displayName: ''
     });
@@ -25,7 +25,7 @@ function UserForm(props) {
 
     const handleReset = () => {
         setForm({
-            loginId: '',
+            emailAddress: '',
             password: '',
             displayName: ''
         });
@@ -56,7 +56,10 @@ function UserForm(props) {
                     <Grid container item md={12} alignItems='center'>
                         <Grid item md={4}>
                             <Typography>
-                                LoginId:
+                                <span style={{ color: "red" }}>
+                                    *
+                                </span>
+                                Email address:
                             </Typography>
                         </Grid>
                         <Grid item md={8}>
@@ -64,15 +67,18 @@ function UserForm(props) {
                                 fullWidth
                                 required
                                 onChange={(e) => handleChange(e.target.name, e.target.value)}
-                                name="loginId"
+                                name="emailAddress"
                                 defaultValue=''
-                                helperText={data ?? "Please use a valid email address as your loginId"}
+                                helperText={data ?? "Please use a valid email address as you will receive a confirmation email afterwards"}
                             />
                         </Grid>
                     </Grid>
                     <Grid container item md={12} alignItems='center'>
                         <Grid item md={4}>
                             <Typography>
+                                <span style={{ color: "red" }}>
+                                    *
+                                </span>
                                 Password:
                             </Typography>
                         </Grid>
@@ -83,7 +89,6 @@ function UserForm(props) {
                                 type={showPassword ? 'text' : 'password'}
                                 onChange={(e) => handleChange(e.target.name, e.target.value)}
                                 name="password"
-                                helperText={data ?? "Scroll down to use our custom password generator"}
                                 defaultValue=''
                                 // InputProps={{
                                 //     endAdornment:
@@ -103,6 +108,9 @@ function UserForm(props) {
                     <Grid container item md={12} alignItems='center'>
                         <Grid item md={4}>
                             <Typography>
+                                <span style={{ color: "red" }}>
+                                    *
+                                </span>
                                 Display Name:
                             </Typography>
                         </Grid>
@@ -114,6 +122,21 @@ function UserForm(props) {
                                 name="displayName"
                                 defaultValue=''
                                 helperText={data ?? "This will be shown as your username"}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid container item md={12} alignItems='center'>
+                        <Grid item md={4}>
+                            <Typography>
+                                Avatar:
+                            </Typography>
+                        </Grid>
+                        <Grid item md={8}>
+                            <TextField
+                                fullWidth
+                                onChange={(e) => handleChange(e.target.name, e.target.value)}
+                                name="avatar"
+                                defaultValue=''
                             />
                         </Grid>
                     </Grid>

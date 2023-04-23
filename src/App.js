@@ -5,11 +5,12 @@ import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Fetching from "./pages/Fetching";
 import Main from "./pages/main/Main";
-import {createContext, useState} from "react";
+import {createContext, useRef, useState} from "react";
 import CreateAccount from "./pages/CreateAccount";
 import ForgetPassword from "./pages/ForgetPassword";
 import CustomDialog from "./components/CustomDialog";
 import { createTheme } from '@mui/material';
+import NewMain from './pages/main/NewMain';
 
 const theme = createTheme({
     palette: {
@@ -65,6 +66,15 @@ function App() {
     const [isLogin, setIsLogin] = useState(window.sessionStorage.getItem('accessToken') ? true : false);
     const [openDialog, setOpenDialog] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const dialogParam = useRef({
+        title: "testing title",
+        content: "testing content",
+        leftLabel: null,
+        leftAction: null,
+        rightLabel: null,
+        rightAction: null
+
+    })
     const securityCheck = (component) => {
         if (isLogin) {
             return component
@@ -74,16 +84,17 @@ function App() {
 
     return (
         <>
-            <DialogContext.Provider value={{ openDialog, setOpenDialog, setIsLoading }}>
+            <DialogContext.Provider value={{ openDialog, setOpenDialog, setIsLoading, dialogParam }}>
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <Routes>
                         <Route exact path="/" element={<Login setIsLogin={setIsLogin} />} />
-                        <Route exact path="/landing" element={securityCheck(<Landing />)} />
-                        <Route exact path="/fetching" element={securityCheck(<Fetching />)} />
-                        <Route exact path="/main" element={securityCheck(<Main />)} />
-                        <Route exact path="/createaccount" element={securityCheck(<CreateAccount />)} />
-                        <Route exact path="/forgetpassword" element={securityCheck(<ForgetPassword />)} />
+                        {/* <Route exact path="/" element={<NewMain />} /> */}
+                        <Route exact path="/landing" element={<Landing />} />
+                        <Route exact path="/fetching" element={<Fetching />} />
+                        <Route exact path="/main" element={<Main />} />
+                        <Route exact path="/createaccount" element={<CreateAccount />} />
+                        <Route exact path="/forgetpassword" element={<ForgetPassword />} />
                     </Routes>
                     <CustomDialog
                         title="Testing dialog title"

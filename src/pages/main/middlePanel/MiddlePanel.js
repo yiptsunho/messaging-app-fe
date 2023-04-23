@@ -12,8 +12,6 @@ import CallIcon from '@mui/icons-material/CallOutlined';
 import _ from 'lodash';
 import { MainContext } from "../Main";
 import DefaultAvatar from "../../../components/DefaultAvatar";
-import StickerEmojiTab from "./StickerDrawer";
-
 function MiddlePanel() {
     const { currentRoom, privateChats, isGroup } = useContext(MainContext);
     const [showTab, setShowTab] = useState(false);

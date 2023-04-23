@@ -10,16 +10,27 @@ import PropTypes from "prop-types";
 import { DialogContext } from '../App';
 
 function CustomDialog(props, ref) {
-    const { title, content, leftLabel, leftAction, rightLabel, rightAction } = props;
-    const { openDialog, setOpenDialog } = useContext(DialogContext)
     const defaultHandleClose = () => {
+        dialogParam.current = {
+            title: "testing title",
+            content: "testing content",
+            leftLabel: null,
+            leftAction: null,
+            rightLabel: null,
+            rightAction: null
+
+        }
         setOpenDialog(false);
     };
+    const { openDialog, setOpenDialog, dialogParam } = useContext(DialogContext)
+    const { title, content,
+        leftLabel= "Cancel", leftAction = defaultHandleClose,
+        rightLabel = "OK", rightAction = defaultHandleClose } = dialogParam.current;
 
     return (
         <Dialog
             open={openDialog}
-            onClose={rightAction ?? defaultHandleClose}
+            onClose={rightAction}
             PaperProps={{
                 style: {
                     borderRadius: 15,
@@ -39,10 +50,8 @@ function CustomDialog(props, ref) {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                {leftLabel &&
-                    <Button onClick={leftAction ?? defaultHandleClose}>{leftLabel ?? 'Cancel'}</Button>
-                }
-                <Button onClick={rightAction ?? defaultHandleClose}>{rightLabel ?? 'OK'}</Button>
+                <Button onClick={leftAction}>{leftLabel}</Button>
+                <Button onClick={rightAction}>{rightLabel}</Button>
             </DialogActions>
         </Dialog >
     );

@@ -11,7 +11,9 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {useNavigate} from "react-router-dom";
-import {useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
+import {DialogContext} from "../App";
+import {login} from "../apis/UserApi";
 
 function Copyright(props) {
     return (
@@ -35,60 +37,63 @@ function Login (props) {
     const password = useRef('')
     const [loginIdValid, setLoginIdValid] = useState(true)
     const [passwordValid, setPasswordValid] = useState(true)
+    const { setOpenDialog, dialogParam } = useContext(DialogContext)
 
     // useEffect(() => {
     //     window.sessionStorage.clear()
     // }, [])
 
     const handleSubmit = (event) => {
-
+        let params = {}
         event.preventDefault()
-        const params = {
-            loginId: loginId.current.value,
+        const payload = {
+            emailAddress: loginId.current.value,
             password: password.current.value
         }
 
-        console.log(params)
-        if (params.loginId.toLowerCase() !== "jacky" && params.loginId.toLowerCase() !== "henry" && params.loginId.toLowerCase() !== "timothy" && params.loginId.toLowerCase() !== "ashley" && params.loginId.toLowerCase() !== "gianna") {
+        console.log(payload)
+        if (!payload.emailAddress) {
             setLoginIdValid(false)
+            return null
         }
-        if (params.password !== "123456") {
+        if (!payload.password) {
             setPasswordValid(false)
+            return null
         }
-        // dummy login function
-        if (loginIdValid && passwordValid) {
-            sessionStorage.setItem('accessToken', 'fake token')
-            if (params.loginId.toLowerCase() === "jacky") {
-                sessionStorage.setItem('userId', "0001")
-                sessionStorage.setItem('loginId', params.loginId)
-            } else if (params.loginId.toLowerCase() === "henry") {
-                sessionStorage.setItem('userId', "0002")
-                sessionStorage.setItem('loginId', params.loginId)
-            } else if (params.loginId.toLowerCase() === "timothy") {
-                sessionStorage.setItem('userId', "0003")
-                sessionStorage.setItem('loginId', params.loginId)
-            } else if (params.loginId.toLowerCase() === "ashley") {
-                sessionStorage.setItem('userId', "0004")
-                sessionStorage.setItem('loginId', params.loginId)
-            } else if (params.loginId.toLowerCase() === "gianna") {
-                sessionStorage.setItem('userId', "0005")
-                sessionStorage.setItem('loginId', params.loginId)
-            }
-            // sessionStorage.setItem('userId', 1)
+        // sessionStorage.setItem('accessToken', 'fake token')
+        // if (pay.loginId.toLowerCase() === "jacky") {
+        //     sessionStorage.setItem('userId', "0001")
+        //     sessionStorage.setItem('loginId', params.loginId)
+        // } else if (params.loginId.toLowerCase() === "henry") {
+        //     sessionStorage.setItem('userId', "0002")
+        //     sessionStorage.setItem('loginId', params.loginId)
+        // } else if (params.loginId.toLowerCase() === "timothy") {
+        //     sessionStorage.setItem('userId', "0003")
+        //     sessionStorage.setItem('loginId', params.loginId)
+        // } else if (params.loginId.toLowerCase() === "ashley") {
+        //     sessionStorage.setItem('userId', "0004")
+        //     sessionStorage.setItem('loginId', params.loginId)
+        // } else if (params.loginId.toLowerCase() === "gianna") {
+        //     sessionStorage.setItem('userId', "0005")
+        //     sessionStorage.setItem('loginId', params.loginId)
+        // }
+        // sessionStorage.setItem('userId', 1)
+        // setIsLogin(true)
+        // navigate("/main")
+
+        // real login function
+        params.payload = payload
+        params.successCallback = (res) => {
             setIsLogin(true)
             navigate("/main")
-
         }
-        // real login function
-        // login(params, setIsLogin, navigate, setOpenDialog, refreshToken)
-
-        const loginSuccessCallback = () => {
-
+        params.failCallback = () => {
+            password.current = ""
+            dialogParam.current.title = "Warning"
+            dialogParam.current.content = "Login failed, please try again"
+            setOpenDialog(true)
         }
-
-        const loginFailCallback = () => {
-
-        }
+        login(params)
     };
 
     return (
@@ -155,8 +160,8 @@ function Login (props) {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link to="/createaccount" variant="body2">
-                                        {"Don't have an account? Sign Up"}
+                                    <Link href="/createaccount" variant="body2">
+                                        Don't have an account? Sign Up
                                     </Link>
                                 </Grid>
                             </Grid>

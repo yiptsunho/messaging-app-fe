@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import { register } from '../apis//UserApi'
+import {DialogContext} from "../App";
 
-function CreateNewAccount() {
+function CreateAccount() {
     const navigate = useNavigate()
-    const [openDialog, setOpenDialog] = useState(false)
+    // const [openDialog, setOpenDialog] = useState(false)
+    const { setOpenDialog, dialogParam } = useContext(DialogContext)
 
     const handleSubmitCreateUser = (form) => {
-        const { loginId, password, displayName } = form;
+        const { emailAddress, password, displayName } = form;
 
         const { isValid, errMsg } = validate(form)
         if (isValid) {
-            const params = {
-                loginId: loginId,
+            let params = {}
+            const payload = {
+                emailAddress: emailAddress,
                 password: password,
-                displayName: displayName
+                displayName: displayName,
+                avatar: null
             }
+            params.payload = payload
+            params.successCallback = (res) => {
+                dialogParam.current.title = res.data.status?.toUpperCase()
+                dialogParam.current.content = res.data.message
+                dialogParam.current.rightAction = () => { navigate("/") }
+                setOpenDialog(true)
 
+            }
+            params.failCallback = (err) => {
+                dialogParam.current.title = err.data.status?.toUpperCase()
+                dialogParam.current.content = err.data.message
+                setOpenDialog(true)
+            }
+            console.log("calling register api")
+            register(params)
             // createNewAccount(params, setOpenDialog, dialogTitle, dialogContent, dialogRightAction, navigate)
 
         } else {
@@ -33,9 +52,9 @@ function CreateNewAccount() {
     const validate = (userDetails) => {
         let isValid = true
         let errMsg = ''
-        const { loginId, password, displayName } = userDetails
-
-        if (!loginId.trim() || !password.trim() || !displayName.trim()) {
+        const { emailAddress, password, displayName } = userDetails
+        console.log(userDetails)
+        if (!emailAddress.trim() || !password.trim() || !displayName.trim()) {
             isValid = false
             errMsg = 'Please input all mandatory field(s)'
         }
@@ -75,4 +94,4 @@ function CreateNewAccount() {
     )
 }
 
-export default CreateNewAccount;
+export default CreateAccount;
